@@ -40,6 +40,10 @@ namespace adventofcode
                 {
                     year2019day1.part1();
                 }
+                else if(part == 2)
+                {
+                    year2019day1.part2();
+                }
                 
             }
         }
