@@ -31,20 +31,26 @@ namespace adventofcode
 
         static void solve(int year, int day, int part)
         {
-            if(year == 2019 && day == 1)
+            if(year == 2019)
             {
-                
-                year2019day1.input = "mytest";
-
-                if(part == 1)
-                {
-                    year2019day1.part1();
+                if(day == 1)
+                {   
+                    if(part == 1)
+                    {
+                        year2019day1.part1();
+                    }
+                    else if(part == 2)
+                    {
+                        year2019day1.part2();
+                    }
                 }
-                else if(part == 2)
+                else if(day == 2)
                 {
-                    year2019day1.part2();
+                    if(part == 1)
+                    {
+                        year2019day2.part1();
+                    }
                 }
-                
             }
         }
 
