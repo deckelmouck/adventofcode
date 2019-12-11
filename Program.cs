@@ -50,6 +50,10 @@ namespace adventofcode
                     {
                         year2019day2.part1();
                     }
+                    else if(part == 2)
+                    {
+                        year2019day2.part2();
+                    }
                 }
             }
         }
