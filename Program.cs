@@ -31,7 +31,7 @@ namespace adventofcode
             }
             else 
             {
-                solve(2019, 3, 1);
+                solve(2019, 3, 2);
             }
 
             Console.WriteLine("Press any key to exit.");
@@ -69,6 +69,10 @@ namespace adventofcode
                     if(part == 1)
                     {
                         year2019day3.part1();
+                    }
+                    else if(part == 2)
+                    {
+                        year2019day3.part2();
                     }
                 }
             }
