@@ -12,18 +12,27 @@ namespace adventofcode
         {
             Console.WriteLine("Hello to adventofcode 2019!");
 
-            Console.WriteLine("Please enter a year:");
-            year = Convert.ToInt32(Console.ReadLine());
+            bool standard = true ;
 
-            Console.WriteLine("Please enter a day:");
-            day = Convert.ToInt32(Console.ReadLine());
+            if(standard)
+            {
+                Console.WriteLine("Please enter a year:");
+                year = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Please enter a part:");
-            part = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Please enter a day:");
+                day = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("you selected year {0} day {1} part {2} to solve. let's try it....", year.ToString(), day.ToString(), part.ToString());
+                Console.WriteLine("Please enter a part:");
+                part = Convert.ToInt32(Console.ReadLine());
 
-            solve(year, day, part);
+                Console.WriteLine("you selected year {0} day {1} part {2} to solve. let's try it....", year.ToString(), day.ToString(), part.ToString());
+
+                solve(year, day, part);
+            }
+            else 
+            {
+                solve(2019, 3, 1);
+            }
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
@@ -53,6 +62,13 @@ namespace adventofcode
                     else if(part == 2)
                     {
                         year2019day2.part2();
+                    }
+                }
+                else if(day == 3)
+                {
+                    if(part == 1)
+                    {
+                        year2019day3.part1();
                     }
                 }
             }
