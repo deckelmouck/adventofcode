@@ -12,7 +12,7 @@ namespace adventofcode
         {
             Console.WriteLine("Hello to adventofcode 2019!");
 
-            bool standard = true ;
+            bool standard = false ;
 
             if(standard)
             {
@@ -31,7 +31,7 @@ namespace adventofcode
             }
             else 
             {
-                solve(2019, 3, 2);
+                solve(2019, 4, 1);
             }
 
             Console.WriteLine("Press any key to exit.");
@@ -73,6 +73,13 @@ namespace adventofcode
                     else if(part == 2)
                     {
                         year2019day3.part2();
+                    }
+                }
+                else if(day == 4)
+                {
+                    if(part == 1)
+                    {
+                        year2019day4.part1();
                     }
                 }
             }
