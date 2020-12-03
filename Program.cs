@@ -33,7 +33,7 @@ namespace adventofcode
             {
                 //solutionDay1 sd1 = new solutionDay1(2);
                 //solutionday02 sd2 = new solutionday02(2);
-                solutionday03 sd3 = new solutionday03(3,1);
+                solutionday03 sd3 = new solutionday03(2);
 
                 
             }
