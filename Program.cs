@@ -32,11 +32,14 @@ namespace adventofcode
             else 
             {
                 //solutionDay1 sd1 = new solutionDay1(2);
-                solutionday02 sd2 = new solutionday02(2);
+                //solutionday02 sd2 = new solutionday02(2);
+                solutionday03 sd3 = new solutionday03(3,1);
+
+                
             }
 
             Console.WriteLine("Press any key to exit.");
-            Console.ReadKey(); 
+            Console.Read(); 
         }
 
         static void solve(int year, int day, int part)
