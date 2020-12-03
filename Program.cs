@@ -1,5 +1,5 @@
 ﻿using System;
-
+using adventofcode;
 namespace adventofcode
 {
     class Program
@@ -31,11 +31,12 @@ namespace adventofcode
             }
             else 
             {
-                solve(2019, 4, 1);
+                //solutionDay1 sd1 = new solutionDay1(2);
+                solutionday02 sd2 = new solutionday02(2);
             }
 
             Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
+            Console.ReadKey(); 
         }
 
         static void solve(int year, int day, int part)
@@ -80,6 +81,10 @@ namespace adventofcode
                     if(part == 1)
                     {
                         year2019day4.part1();
+                    }
+                    else if(part == 2)
+                    {
+                        year2019day4.part2();
                     }
                 }
             }
