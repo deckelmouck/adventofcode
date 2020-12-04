@@ -7,7 +7,6 @@ namespace adventofcode
     class solutionday03
     {
         string filename = @"C:\dev\adventofcode\2020\Day03\input.txt";
-        int multi = 0;
 
         public solutionday03(int part)
         {
@@ -36,15 +35,7 @@ namespace adventofcode
 
         public int encounter(int right, int down)
         {
-            int[] test = inputWidthAndHeight();
-            string output = string.Format("input dimensions are widht {0}, heigth {1}", test[0].ToString(), test[1].ToString());
-            Console.WriteLine(output);
-
-            int neededwidth = right * down * test[1];
-
-            multi = neededwidth / test[0] + 1;
-
-            List<string> input = getInput(multi);
+            List<string> input = getInput();
 
             int x = 0;
             int y = 0;
@@ -54,7 +45,7 @@ namespace adventofcode
             {   
                 if(y % down == 0)
                 {
-                    if(item[x].ToString() == "#")
+                    if(item[x % item.Length].ToString() == "#")
                     {
                         trees++;
                     }
@@ -62,7 +53,7 @@ namespace adventofcode
                 }             
                 
                 y++;
-                Console.Write(".");
+                //Console.Write(".");
             }
             
             Console.WriteLine(string.Format("encounter {0} trees", trees.ToString()));
@@ -70,41 +61,7 @@ namespace adventofcode
 
         }
 
-        public int[] inputWidthAndHeight()
-        {
-            int width = 0;
-            int height = 0;
-            int[] dimensions = new int[2];
-
-            try
-            {
-                using (StreamReader reader = new StreamReader(filename))
-                {
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        int length = line.Length;
-                        if(width < length)
-                        {
-                            width = length;
-                        }
-                        height++;                        
-                    }
-                }
-
-                dimensions[0] = width;
-                dimensions[1] = height;
-                
-                return dimensions;
-            }
-            catch (System.Exception)
-            {
-                
-                throw;
-            }
-        }
-
-        public List<string> getInput(int multi)
+        public List<string> getInput()
         {
             List<string> inputList = new List<string>();
 
@@ -115,14 +72,7 @@ namespace adventofcode
                     string line;
                     while ((line = reader.ReadLine()) != null)
                     {
-                        string newline = line;
-
-                        for (int i = 0; i < multi; i++)
-                        {
-                            newline = newline + line;
-                        }
-
-                        inputList.Add(newline);
+                        inputList.Add(line);
                     }
                 }
                 return inputList;
