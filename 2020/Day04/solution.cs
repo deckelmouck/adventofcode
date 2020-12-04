@@ -69,7 +69,7 @@ namespace adventofcode
                 }
 
                 Console.WriteLine(string.Format("{0} passports in list", passports.Count.ToString()));
-                Console.WriteLine(string.Format("{0} passports are valid", (passports.FindAll(p => p.isValid() == true).Count + 1).ToString()));
+                Console.WriteLine(string.Format("{0} passports are valid", (passports.FindAll(p => p.isValid() == true).Count).ToString()));
 
                 
             }
