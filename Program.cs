@@ -10,7 +10,7 @@ namespace adventofcode
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello to adventofcode 2019!");
+            Console.WriteLine("Hello to adventofcode!");
 
             bool standard = false ;
 
@@ -33,10 +33,9 @@ namespace adventofcode
             {
                 //solutionDay1 sd1 = new solutionDay1(2);
                 //solutionday02 sd2 = new solutionday02(2);
-                solutionday03 sd3 = new solutionday03(2);
+                //solutionday03 sd3 = new solutionday03(2);
                 //solutionday04 sd4 = new solutionday04(1);
-
-                
+                solutionday05 sd5 = new solutionday05(1);                
             }
 
             Console.WriteLine("Press any key to exit.");
