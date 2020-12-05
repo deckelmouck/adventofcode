@@ -16,7 +16,7 @@ namespace adventofcode
 
             foreach (var item in input)
             {
-                Console.WriteLine(item);
+                //Console.WriteLine(item);
                 boardingIds.Add(getSeatId(item));
             }
 
