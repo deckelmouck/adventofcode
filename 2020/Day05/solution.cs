@@ -24,7 +24,22 @@ namespace adventofcode
             {
                 Console.WriteLine(string.Format("greatest boarding id is: {0}", boardingIds.Max().ToString()));
             }
-            
+
+            if(part == 2)
+            {
+                boardingIds.Sort();
+
+                int minId = boardingIds.Min();
+                int maxId = boardingIds.Max();
+
+                for (int i = minId; i < maxId; i++)
+                {
+                    if(!boardingIds.Contains(i))
+                    {
+                        Console.WriteLine(string.Format("not in boardingIds: {0}", i.ToString()));
+                    }
+                }
+            }
         }
 
         public int getSeatId(string boarding)
@@ -37,8 +52,8 @@ namespace adventofcode
             rowstring = rowstring.Replace("B","1").Replace("F", "0");
             seatstring = seatstring.Replace("R", "1").Replace("L","0");
 
-            Console.WriteLine(string.Format("row: {0}, seat: {1}", rowstring, seatstring));
-            Console.WriteLine(string.Format("row: {0}, seat: {1}, seatid: {2}",  Convert.ToInt32(rowstring, 2).ToString(), Convert.ToInt32(seatstring, 2).ToString(), (Convert.ToInt32(rowstring, 2) * 8) + (Convert.ToInt32(seatstring, 2))));
+            //Console.WriteLine(string.Format("row: {0}, seat: {1}", rowstring, seatstring));
+            //Console.WriteLine(string.Format("row: {0}, seat: {1}, seatid: {2}",  Convert.ToInt32(rowstring, 2).ToString(), Convert.ToInt32(seatstring, 2).ToString(), (Convert.ToInt32(rowstring, 2) * 8) + (Convert.ToInt32(seatstring, 2))));
 
             ret = (Convert.ToInt32(rowstring, 2) * 8) + (Convert.ToInt32(seatstring, 2));
 

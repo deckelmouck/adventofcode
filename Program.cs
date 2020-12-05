@@ -35,7 +35,7 @@ namespace adventofcode
                 //solutionday02 sd2 = new solutionday02(2);
                 //solutionday03 sd3 = new solutionday03(2);
                 //solutionday04 sd4 = new solutionday04(1);
-                solutionday05 sd5 = new solutionday05(1);                
+                solutionday05 sd5 = new solutionday05(2);                
             }
 
             Console.WriteLine("Press any key to exit.");
