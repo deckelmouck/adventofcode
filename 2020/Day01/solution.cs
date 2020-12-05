@@ -4,9 +4,9 @@ using System.IO;
 
 namespace adventofcode
 {
-    class solutionDay1
+    class solutionDay01
     {
-        public solutionDay1(int part)
+        public solutionDay01(int part)
         {
             List<int> input = new List<int>();
             input = getInput();

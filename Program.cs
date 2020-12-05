@@ -10,20 +10,14 @@ namespace adventofcode
 
         static void Main(string[] args)
         {
+            DateTime start = DateTime.Now;
             Console.WriteLine("Hello to adventofcode!");
 
-            bool standard = false ;
-
-            if(standard)
+            if(args.Length == 3)
             {
-                Console.WriteLine("Please enter a year:");
-                year = Convert.ToInt32(Console.ReadLine());
-
-                Console.WriteLine("Please enter a day:");
-                day = Convert.ToInt32(Console.ReadLine());
-
-                Console.WriteLine("Please enter a part:");
-                part = Convert.ToInt32(Console.ReadLine());
+                year = Convert.ToInt32(args[0]);
+                day = Convert.ToInt32(args[1]);
+                part = Convert.ToInt32(args[2]);
 
                 Console.WriteLine("you selected year {0} day {1} part {2} to solve. let's try it....", year.ToString(), day.ToString(), part.ToString());
 
@@ -38,12 +32,41 @@ namespace adventofcode
                 solutionday05 sd5 = new solutionday05(2);                
             }
 
-            Console.WriteLine("Press any key to exit.");
-            Console.Read(); 
+            TimeSpan timeSpan = DateTime.Now - start;
+            Console.Write("Problem solved in ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(string.Format("{0} ms", timeSpan.TotalMilliseconds.ToString()));
+            Console.ResetColor();
+            //Console.WriteLine("Press any key to exit.");
+            //Console.Read(); 
         }
 
         static void solve(int year, int day, int part)
         {
+            if(year == 2020)
+            {
+                switch (day)
+                {
+                    case 1:
+                        solutionDay01 sd1 = new solutionDay01(part);
+                        break;
+                    case 2:
+                        solutionday02 sd2 = new solutionday02(part);
+                        break;
+                    case 3:
+                        solutionday03 sd3 = new solutionday03(part);
+                        break;
+                    case 4:
+                        solutionday04 sd4 = new solutionday04(part);
+                        break;
+                    case 5:
+                        solutionday05 sd5 = new solutionday05(part);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             if(year == 2019)
             {
                 if(day == 1)
@@ -92,7 +115,6 @@ namespace adventofcode
                 }
             }
         }
-
     }
 }
 ;
