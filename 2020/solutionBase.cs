@@ -6,6 +6,29 @@ namespace adventofcode
 {
     class solutionBase
     {
+        public List<string> getInputLines(string filename)
+        {
+            List<string> inputList = new List<string>();
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        inputList.Add(line);
+                    }
+                }
+                return inputList;
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
+
         /// gets input from multiple lines seperated by a blank line in a list of string
         public List<string> getInput(string filename)
         {
