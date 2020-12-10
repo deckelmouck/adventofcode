@@ -108,5 +108,54 @@ namespace adventofcode
                 throw;
             }
         }
+
+        public List<long> getInputLong(string filename )
+        {
+            //string filename = @"C:\dev\adventofcode\2020\Day01\input.txt";
+            List<long> inputList = new List<long>();
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        inputList.Add(Convert.ToInt64(line));
+                    }
+                }
+                return inputList;
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
+        
+
+        public List<long> getInputListLong(string filename )
+        {
+            //string filename = @"C:\dev\adventofcode\2020\Day01\input.txt";
+            List<long> inputList = new List<long>();
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        inputList.Add(Convert.ToInt64(line));
+                    }
+                }
+                return inputList;
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }
