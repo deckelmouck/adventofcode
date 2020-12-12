@@ -18,13 +18,21 @@ namespace adventofcode
                 Status = status;
             }
 
+            public Chair(Chair c)
+            {
+                GridColumn = c.GridColumn;
+                GridRow = c.GridRow;
+                Status = c.Status;
+            }
+
         }
 
-        public int _Changes = 0;
+        public int _Part = 0;
 
         public solutionday11(int part)
         {
-            var input = getInputLines(@"C:\dev\adventofcode\2020\Day11\input.txt");
+            _Part = part;
+            var input = getInputLines(@"C:\dev\adventofcode\2020\Day11\testinput.txt");
 
             List<Chair> map = new List<Chair>();
 
@@ -75,9 +83,14 @@ namespace adventofcode
             {
                 Chair neighboor = map.Find(c => c.GridColumn == chair.GridColumn + col && c.GridRow == chair.GridRow + row);
 
-                if( neighboor != null && neighboor.Status == "#")
+                if(neighboor != null && neighboor.Status == "#")
                 {
                     neighboors++;
+                }
+                else if (neighboor != null && _Part == 2 && neighboor.Status == ".")
+                {
+                    //recursive look at other neighboors in this direction to find an occupied seat..
+                    
                 }
             }
             return neighboors;
@@ -85,7 +98,7 @@ namespace adventofcode
 
         public List<Chair> Seating(List<Chair> map)
         {
-            _Changes = 1;
+            int OccupiedLimit = 5; //(_Part == 1) ? 4 : 5;
             List<Chair> newMap = new List<Chair>();
 
             foreach (var chair in map)
@@ -95,12 +108,10 @@ namespace adventofcode
                 if(newChair.Status == "L" && CheckNeighboors(map, newChair) == 0)
                 {
                     newChair.Status = "#";
-                    _Changes++;
                 }
-                else if (newChair.Status == "#" && CheckNeighboors(map, newChair) >= 4)
+                else if (newChair.Status == "#" && CheckNeighboors(map, newChair) >= OccupiedLimit)
                 {
                     newChair.Status = "L";
-                    _Changes++;
                 }
 
                 newMap.Add(newChair);
