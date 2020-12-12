@@ -89,7 +89,7 @@ namespace adventofcode
                 }
                 else if (neighboor != null && _Part == 2 && neighboor.Status == ".")
                 {
-                    //recursive look at other neighboors in this direction to find an occupied seat..
+                    //recursive look at other neighboors in this direction (one of eight) to find an occupied seat..
                     
                 }
             }
