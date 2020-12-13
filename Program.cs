@@ -80,6 +80,9 @@ namespace adventofcode
                     case 12:
                         solutionday12 sd12 = new solutionday12(part);
                         break;
+                    case 13:
+                        solutionday13 sd13 = new solutionday13(part);
+                        break;
                     default:
                         break;
                 }

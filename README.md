@@ -5,18 +5,19 @@ personal adventofcode.com solution
 using c# with dotnet core framework
 
 # overview 2020
-- day 1 :star: :star:
-- day 2 :star: :star:
-- day 3 :star: :star:
-- day 4 :star: :star:
-- day 5 :star: :star:
-- day 6 :star: :star:
-- day 7 
-- day 8 :star: :star:
-- day 9 :star: :star:
+- day01 :star: :star:
+- day02 :star: :star:
+- day03 :star: :star:
+- day04 :star: :star:
+- day05 :star: :star:
+- day06 :star: :star:
+- day07 
+- day08 :star: :star:
+- day09 :star: :star:
 - day10 :star:
 - day11 :star:
 - day12
+- day13
 
 # overview 2019
 - day 1 :star: :star:
