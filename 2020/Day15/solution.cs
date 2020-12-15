@@ -26,7 +26,7 @@ namespace adventofcode
             }
 
             List<Spoken> spokenList = new List<Spoken>();
-            int searchTurn = 2020;
+            int searchTurn = (part == 1) ? 2020 : 30000000;
 
             for (int i = 0; i < searchTurn; i++)
             {
