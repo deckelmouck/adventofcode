@@ -18,6 +18,9 @@ using c# with dotnet core framework
 - day11 :star:
 - day12
 - day13 :star:
+- day14
+- day15 :star: :star:
+- day16
 
 # overview 2019
 - day 1 :star: :star:
