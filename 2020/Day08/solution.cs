@@ -119,7 +119,7 @@ namespace adventofcode
         
         public List<aocinstruction> getInput()
         {
-            string filename = @"C:\dev\adventofcode\2020\Day08\input.txt";
+            string filename = @"2020\Day08\input.txt";
             List<aocinstruction> inputList = new List<aocinstruction>();
             int count = 0;
             try

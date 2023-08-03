@@ -12,7 +12,7 @@ namespace adventofcode
 
             if(part == 1)
             {
-                List<string> input = getInput(@"C:\dev\adventofcode\2020\Day06\input.txt");
+                List<string> input = getInput(@"2020\Day06\input.txt");
 
                 foreach (var item in input)
                 {
@@ -28,7 +28,7 @@ namespace adventofcode
 
             if (part == 2)
             {
-                List<List<string>> input = getInputListed(@"C:\dev\adventofcode\2020\Day06\input.txt");
+                List<List<string>> input = getInputListed(@"2020\Day06\input.txt");
                 int yes = 0;
 
                 foreach (var group in input)

@@ -59,7 +59,7 @@ namespace adventofcode
 
         public List<int> getInput()
         {
-            string filename = @"C:\dev\adventofcode\2020\Day01\input.txt";
+            string filename = @"2020\Day01\input.txt";
             List<int> inputList = new List<int>();
 
             try

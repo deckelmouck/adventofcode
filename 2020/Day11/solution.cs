@@ -32,7 +32,7 @@ namespace adventofcode
         public solutionday11(int part)
         {
             _Part = part;
-            var input = getInputLines(@"C:\dev\adventofcode\2020\Day11\testinput.txt");
+            var input = getInputLines(@"2020\Day11\testinput.txt");
 
             List<Chair> map = new List<Chair>();
 

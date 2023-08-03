@@ -6,7 +6,7 @@ namespace adventofcode
     {
         public solutionday10(int part)
         {
-            var input = getInputLong(@"C:\dev\adventofcode\2020\Day10\Input.txt");
+            var input = getInputLong(@"2020\Day10\Input.txt");
 
             input.Sort();
 

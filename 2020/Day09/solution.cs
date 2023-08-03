@@ -8,7 +8,7 @@ namespace adventofcode
     {
         public solutionday09(int part)
         {
-            var input = getInputLong(@"C:\dev\adventofcode\2020\Day09\input.txt");
+            var input = getInputLong(@"2020\Day09\input.txt");
 
             int pos = 0;
             long nomatch = 0;

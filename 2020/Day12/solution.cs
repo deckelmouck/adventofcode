@@ -89,7 +89,7 @@ namespace adventofcode
         public solutionday12(int part)
         {
             Ship ship = new Ship();
-            var instructions = getInputLines(@"C:\dev\adventofcode\2020\Day12\testinput.txt");
+            var instructions = getInputLines(@"2020\Day12\testinput.txt");
 
             foreach (var instruction in instructions)
             {

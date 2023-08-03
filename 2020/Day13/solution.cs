@@ -6,7 +6,7 @@ namespace adventofcode
     {
         public solutionday13(int part)
         {
-            var input = getInputLines(@"C:\dev\adventofcode\2020\Day13\input.txt");
+            var input = getInputLines(@"2020\Day13\input.txt");
 
             int timestamp = Convert.ToInt32(input[0]);            
             int _line = 99999;

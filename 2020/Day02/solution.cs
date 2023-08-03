@@ -61,7 +61,7 @@ namespace adventofcode
 
         public List<string> getInput()
         {
-            string filename = @"C:\dev\adventofcode\2020\Day02\input.txt";
+            string filename = @"2020\Day02\input.txt";
 
             List<string> inputList = new List<string>();
 

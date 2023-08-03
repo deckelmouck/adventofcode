@@ -32,7 +32,7 @@ namespace adventofcode
         /// gets input from multiple lines seperated by a blank line in a list of string
         public List<string> getInput(string filename)
         {
-            //string filename = @"C:\dev\adventofcode\2020\Day04\input.txt";
+            //string filename = @"2020\Day04\input.txt";
 
             List<string> inputList = new List<string>();
 
@@ -69,7 +69,7 @@ namespace adventofcode
 
         public List<List<string>> getInputListed(string filename)
         {
-            //string filename = @"C:\dev\adventofcode\2020\Day04\input.txt";
+            //string filename = @"2020\Day04\input.txt";
 
             List<List<string>> inputList = new List<List<string>>();
 
@@ -111,7 +111,7 @@ namespace adventofcode
 
         public List<long> getInputLong(string filename )
         {
-            //string filename = @"C:\dev\adventofcode\2020\Day01\input.txt";
+            //string filename = @"2020\Day01\input.txt";
             List<long> inputList = new List<long>();
 
             try
@@ -136,7 +136,7 @@ namespace adventofcode
 
         public List<long> getInputListLong(string filename )
         {
-            //string filename = @"C:\dev\adventofcode\2020\Day01\input.txt";
+            //string filename = @"2020\Day01\input.txt";
             List<long> inputList = new List<long>();
 
             try

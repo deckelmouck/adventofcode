@@ -6,7 +6,7 @@ namespace adventofcode
 {
     class solutionday03
     {
-        string filename = @"C:\dev\adventofcode\2020\Day03\input.txt";
+        string filename = @"2020\Day03\input.txt";
 
         public solutionday03(int part)
         {
