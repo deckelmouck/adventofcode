@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace adventofcode
 {
-    public class code
+    public class Code
     {
         public int value {get; set;}
         public int first {get; set;}
@@ -17,7 +17,7 @@ namespace adventofcode
 
     public class year2019day4
     {
-        public static List<code> codes = new List<code>();
+        public static List<Code> codes = new List<Code>();
 
         public static int codestart = 0;
         public static int codeend = 999999;
@@ -25,7 +25,7 @@ namespace adventofcode
         public static void part1()
         {
             string line;
-            string filepath = Environment.CurrentDirectory + @"\inputs\201904_1.txt";
+            string filepath = Environment.CurrentDirectory + @"\2019\Day04\201904_1.txt";
 
             System.IO.StreamReader file = new System.IO.StreamReader(filepath);
 
@@ -41,7 +41,7 @@ namespace adventofcode
 
             for (int codevalue = codestart; codevalue <= codeend; codevalue ++)
             {
-                code mycode = new code();
+                Code mycode = new Code();
 
                 mycode.value = codevalue;
                 mycode.first = Convert.ToInt32((codevalue.ToString()).Substring(0, 1));
@@ -79,7 +79,7 @@ namespace adventofcode
         public static void part2()
         {
             string line;
-            string filepath = Environment.CurrentDirectory + @"\inputs\201904_1.txt";
+            string filepath = Environment.CurrentDirectory + @"\2019\Day04\201904_1.txt";
 
             System.IO.StreamReader file = new System.IO.StreamReader(filepath);
 
@@ -95,7 +95,7 @@ namespace adventofcode
 
             for (int codevalue = codestart; codevalue <= codeend; codevalue ++)
             {
-                code mycode = new code();
+                Code mycode = new Code();
 
                 mycode.value = codevalue;
                 mycode.first = Convert.ToInt32((codevalue.ToString()).Substring(0, 1));

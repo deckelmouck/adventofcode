@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace adventofcode
 {
-    class passport
+    class Passport
     {
         public int byr { get; set; }
         public int iyr { get; set; }
@@ -14,7 +14,7 @@ namespace adventofcode
         public string pid { get; set; }
         public int cid { get; set; }
 
-        public passport()
+        public Passport()
         {
             byr = -1;
             iyr = -1;

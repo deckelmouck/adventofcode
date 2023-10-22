@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace adventofcode
 {
-    public class waypoint
+    public class Waypoint
     {
         public int line {get; set;}
         public int xcoordinate {get; set;}
@@ -14,7 +14,7 @@ namespace adventofcode
 
     public class year2019day3
     {
-        public static List<waypoint> waypoints = new List<waypoint>();
+        public static List<Waypoint> waypoints = new List<Waypoint>();
 
         public static int actualx;
         public static int actualy;
@@ -23,7 +23,7 @@ namespace adventofcode
         public static void part1()
         {
             string line;
-            string filepath = Environment.CurrentDirectory + @"\inputs\201903_1.txt";
+            string filepath = Environment.CurrentDirectory + @"\2019\Day03\201903_1.txt";
 
             System.IO.StreamReader file = new System.IO.StreamReader(filepath);
             
@@ -72,10 +72,10 @@ namespace adventofcode
                 }
             }
 
-            List<waypoint> lstwp1 = new List<waypoint>();
-            List<waypoint> lstwp2 = new List<waypoint>();
+            List<Waypoint> lstwp1 = new List<Waypoint>();
+            List<Waypoint> lstwp2 = new List<Waypoint>();
 
-            foreach (waypoint wayp in waypoints)
+            foreach (Waypoint wayp in waypoints)
             {
                 if(wayp.line == 1)
                 {
@@ -90,17 +90,17 @@ namespace adventofcode
             Console.WriteLine(lstwp1.Count.ToString());
             Console.WriteLine(lstwp2.Count.ToString());
 
-            List<waypoint> lstwpboth = new List<waypoint>();
+            List<Waypoint> lstwpboth = new List<Waypoint>();
 
             int countboth = 0;
             int countfirst = 1;
             int countfirstall = lstwp1.Count;
             
-            foreach(waypoint wayp1 in lstwp1)
+            foreach(Waypoint wayp1 in lstwp1)
             {
                 if(!lstwpboth.Contains(wayp1))
                 {
-                    foreach(waypoint wayp2 in lstwp2)
+                    foreach(Waypoint wayp2 in lstwp2)
                     {
                         if(!lstwpboth.Contains(wayp2))
                         {
@@ -125,10 +125,10 @@ namespace adventofcode
 
             Console.WriteLine("there are {0} waypoints in both lines", lstwpboth.Count.ToString());
 
-            waypoint lowestwaypoint = new waypoint();
+            Waypoint lowestwaypoint = new Waypoint();
             lowestwaypoint = lstwpboth[0];
 
-            foreach (waypoint wp in lstwpboth)
+            foreach (Waypoint wp in lstwpboth)
             {
                 if(wp.manhattendistance < lowestwaypoint.manhattendistance)
                 {
@@ -144,7 +144,7 @@ namespace adventofcode
         public static void part2()
         {
             string line;
-            string filepath = Environment.CurrentDirectory + @"\inputs\201903_1.txt";
+            string filepath = Environment.CurrentDirectory + @"\2019\Day03\201903_1.txt";
 
             System.IO.StreamReader file = new System.IO.StreamReader(filepath);
             
@@ -194,10 +194,10 @@ namespace adventofcode
                 }
             }
 
-            List<waypoint> lstwp1 = new List<waypoint>();
-            List<waypoint> lstwp2 = new List<waypoint>();
+            List<Waypoint> lstwp1 = new List<Waypoint>();
+            List<Waypoint> lstwp2 = new List<Waypoint>();
 
-            foreach (waypoint wayp in waypoints)
+            foreach (Waypoint wayp in waypoints)
             {
                 if(wayp.line == 1)
                 {
@@ -212,17 +212,17 @@ namespace adventofcode
             Console.WriteLine(lstwp1.Count.ToString());
             Console.WriteLine(lstwp2.Count.ToString());
 
-            List<waypoint> lstwpboth = new List<waypoint>();
+            List<Waypoint> lstwpboth = new List<Waypoint>();
 
             int countboth = 0;
             int countfirst = 1;
             int countfirstall = lstwp1.Count;
             
-            foreach(waypoint wayp1 in lstwp1)
+            foreach(Waypoint wayp1 in lstwp1)
             {
                 if(!lstwpboth.Contains(wayp1))
                 {
-                    foreach(waypoint wayp2 in lstwp2)
+                    foreach(Waypoint wayp2 in lstwp2)
                     {
                         if(!lstwpboth.Contains(wayp2))
                         {
@@ -248,10 +248,10 @@ namespace adventofcode
 
             Console.WriteLine("there are {0} waypoints in both lines", lstwpboth.Count.ToString());
 
-            waypoint lowestwaypoint = new waypoint();
+            Waypoint lowestwaypoint = new Waypoint();
             lowestwaypoint = lstwpboth[0];
 
-            foreach (waypoint wp in lstwpboth)
+            foreach (Waypoint wp in lstwpboth)
             {
 
                 if(wp.manhattendistance < lowestwaypoint.manhattendistance)
@@ -271,7 +271,7 @@ namespace adventofcode
             {
                 actualy = actualy + 1;
                 step++;
-                waypoints.Add(new waypoint{ line = line, xcoordinate = actualx, ycoordinate = actualy, manhattendistance = Math.Abs(actualx) + Math.Abs(actualy), steps = step });
+                waypoints.Add(new Waypoint{ line = line, xcoordinate = actualx, ycoordinate = actualy, manhattendistance = Math.Abs(actualx) + Math.Abs(actualy), steps = step });
             }
         }
         public static void moved(int line, int count)
@@ -280,7 +280,7 @@ namespace adventofcode
             {
                 actualy = actualy - 1;
                 step++;
-                waypoints.Add(new waypoint{ line = line, xcoordinate = actualx, ycoordinate = actualy, manhattendistance = Math.Abs(actualx) + Math.Abs(actualy), steps = step });
+                waypoints.Add(new Waypoint{ line = line, xcoordinate = actualx, ycoordinate = actualy, manhattendistance = Math.Abs(actualx) + Math.Abs(actualy), steps = step });
             }
         }
         public static void movel(int line, int count)
@@ -289,7 +289,7 @@ namespace adventofcode
             {
                 actualx = actualx - 1;
                 step++;
-                waypoints.Add(new waypoint{ line = line, xcoordinate = actualx, ycoordinate = actualy, manhattendistance = Math.Abs(actualx) + Math.Abs(actualy), steps = step });
+                waypoints.Add(new Waypoint{ line = line, xcoordinate = actualx, ycoordinate = actualy, manhattendistance = Math.Abs(actualx) + Math.Abs(actualy), steps = step });
             }
         }
         public static void mover(int line, int count)
@@ -298,7 +298,7 @@ namespace adventofcode
             {
                 actualx = actualx + 1;
                 step++;
-                waypoints.Add(new waypoint{ line = line, xcoordinate = actualx, ycoordinate = actualy, manhattendistance = Math.Abs(actualx) + Math.Abs(actualy), steps = step });
+                waypoints.Add(new Waypoint{ line = line, xcoordinate = actualx, ycoordinate = actualy, manhattendistance = Math.Abs(actualx) + Math.Abs(actualy), steps = step });
             }
         }
 

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace adventofcode
 {    
-    class aocinstruction
+    class Aocinstruction
     {
         public int Id { get; set; }
         public string Operation { get; set; }
@@ -63,7 +63,7 @@ namespace adventofcode
 
         }
 
-        public void solve(List<aocinstruction> input)
+        public void solve(List<Aocinstruction> input)
         {    
             int accumulator = 0;
             int step = 0;
@@ -72,7 +72,7 @@ namespace adventofcode
 
             while (execute)
             {
-                aocinstruction nextInstruction = input[step];
+                Aocinstruction nextInstruction = input[step];
 
                 if(nextInstruction.Executed || step > input.Count)
                 {
@@ -117,10 +117,10 @@ namespace adventofcode
             }
         }
         
-        public List<aocinstruction> getInput()
+        public List<Aocinstruction> getInput()
         {
             string filename = @"2020\Day08\input.txt";
-            List<aocinstruction> inputList = new List<aocinstruction>();
+            List<Aocinstruction> inputList = new List<Aocinstruction>();
             int count = 0;
             try
             {
@@ -130,7 +130,7 @@ namespace adventofcode
                     while ((line = reader.ReadLine()) != null)
                     {
 
-                        aocinstruction ins = new aocinstruction();
+                        Aocinstruction ins = new Aocinstruction();
 
                         ins.Id = count;
                         ins.Operation = line.Split(" ")[0];
