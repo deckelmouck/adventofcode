@@ -46,7 +46,11 @@ namespace adventofcode
         {
             if(year == 2022)
             {
-                Assembly assembly = Assembly.LoadFrom(@"C:\dev\adventofcode\bin\debug\net7.0\adventofcode.dll");
+                //Assembly assembly = Assembly.LoadFrom(@"C:\dev\adventofcode\bin\debug\net7.0\adventofcode.dll");
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                
+                Console.WriteLine("{0}", assembly.FullName);
+
                 Type type = assembly.GetType("aoc2022.solutionDay01");
                 object instance = Activator.CreateInstance(type);
 
