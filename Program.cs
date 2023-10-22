@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using adventofcode;
 namespace adventofcode
 {
@@ -43,6 +44,19 @@ namespace adventofcode
 
         static void solve(int year, int day, int part)
         {
+            if(year == 2022)
+            {
+                Assembly assembly = Assembly.LoadFrom(@"C:\dev\adventofcode\bin\debug\net7.0\adventofcode.dll");
+                Type type = assembly.GetType("aoc2022.solutionDay01");
+                object instance = Activator.CreateInstance(type);
+
+                MethodInfo solve = type.GetMethod("Solve");
+
+                solve.Invoke(instance, null);
+                
+                Console.WriteLine("solved...");
+            }
+
             if(year == 2020)
             {
                 switch (day)
