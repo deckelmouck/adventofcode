@@ -11,7 +11,7 @@ namespace adventofcode
             string line;
             //int counter = 0;
             int neededfuel = 0;
-            string filepath = Environment.CurrentDirectory + @"\inputs\201901_1.txt";
+            string filepath = Environment.CurrentDirectory + @"\2019\Day01\201901_1.txt";
             Console.WriteLine(filepath);
 
             if(System.IO.File.Exists(filepath))
@@ -36,7 +36,7 @@ namespace adventofcode
             string line;
             //int counter = 0;
             int neededfuel = 0;
-            string filepath = Environment.CurrentDirectory + @"\inputs\201901_1.txt";
+            string filepath = Environment.CurrentDirectory + @"\2019\Day01\201901_1.txt";
             Console.WriteLine(filepath);
 
             if(System.IO.File.Exists(filepath))

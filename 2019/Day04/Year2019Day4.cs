@@ -25,7 +25,7 @@ namespace adventofcode
         public static void part1()
         {
             string line;
-            string filepath = Environment.CurrentDirectory + @"\inputs\201904_1.txt";
+            string filepath = Environment.CurrentDirectory + @"\2019\Day04\201904_1.txt";
 
             System.IO.StreamReader file = new System.IO.StreamReader(filepath);
 
@@ -79,7 +79,7 @@ namespace adventofcode
         public static void part2()
         {
             string line;
-            string filepath = Environment.CurrentDirectory + @"\inputs\201904_1.txt";
+            string filepath = Environment.CurrentDirectory + @"\2019\Day04\201904_1.txt";
 
             System.IO.StreamReader file = new System.IO.StreamReader(filepath);
 

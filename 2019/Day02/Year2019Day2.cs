@@ -9,7 +9,7 @@ namespace adventofcode
         public static void part1()
         {
             string line;
-            string filepath = Environment.CurrentDirectory + @"\inputs\201902_1.txt";
+            string filepath = Environment.CurrentDirectory + @"\2019\Day02\201902_1.txt";
 
             System.IO.StreamReader file = new System.IO.StreamReader(filepath);
             line = file.ReadLine();
@@ -66,7 +66,7 @@ namespace adventofcode
         public static void part2()
         {
             string line;
-            string filepath = Environment.CurrentDirectory + @"\inputs\201902_1.txt";
+            string filepath = Environment.CurrentDirectory + @"\2019\Day02\201902_1.txt";
 
             System.IO.StreamReader file = new System.IO.StreamReader(filepath);
             line = file.ReadLine();
