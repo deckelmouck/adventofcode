@@ -14,7 +14,7 @@ namespace adventofcode
             {
 
                 List<string> input = getInput();
-                List<passport> passports = new List<passport>();
+                List<Passport> passports = new List<Passport>();
 
                 foreach (var item in input)
                 {
@@ -27,7 +27,7 @@ namespace adventofcode
                         arrpassport[i] = item.Split(" ")[i];
                     }
 
-                    passport pass = new passport();
+                    Passport pass = new Passport();
 
                     foreach (var keyvalue in arrpassport)
                     {
