@@ -32,11 +32,23 @@ namespace adventofcode
             }
             else 
             {
+                // for testing
+                var today = new DateTime(2022, 12, 1);
+                
+                if(start.Month == 12 && start.Day < 26)
+                {
+                    today = start;
+                }
+
+                Console.WriteLine($"set today for testing to {today.ToShortDateString()}");
+                
+                solve(today.Year, today.Day);
+
                 //solutionDay1 sd1 = new solutionDay1(2);
                 //solutionday02 sd2 = new solutionday02(2);
                 //solutionday03 sd3 = new solutionday03(2);
                 //solutionday04 sd4 = new solutionday04(1);
-                solutionday05 sd5 = new solutionday05(2);                
+                //solutionday05 sd5 = new solutionday05(2);                
             }
 
             TimeSpan timeSpan = DateTime.Now - start;
@@ -61,11 +73,10 @@ namespace adventofcode
             {
                 //Assembly assembly = Assembly.LoadFrom(@"C:\dev\adventofcode\bin\debug\net7.0\adventofcode.dll");
                 Assembly assembly = Assembly.GetExecutingAssembly();
-                
-                Console.WriteLine("{0}", assembly.FullName);
+                //Console.WriteLine("{0}", assembly.FullName);
 
                 var solution = $"aoc{year.ToString("D4")}.solutionDay{day.ToString("D2")}";
-                Console.WriteLine(solution);
+                //Console.WriteLine(solution);
 
                 Type type = assembly.GetType("aoc2022.solutionDay01");
                 object instance = Activator.CreateInstance(type);
@@ -75,6 +86,11 @@ namespace adventofcode
                 solve.Invoke(instance, null);
                 
                 Console.WriteLine("solved...");
+            }
+
+            if(year == 2021)
+            {
+                Console.WriteLine("not yet implemented");
             }
 
             if(year == 2020)
