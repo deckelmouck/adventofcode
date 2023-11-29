@@ -24,6 +24,12 @@ namespace adventofcode
 
                 solve(year, day, part);
             }
+            else if (args.Length == 2)
+            {
+                year = Convert.ToInt32(args[0]);
+                day = Convert.ToInt32(args[1]);
+                solve(year, day);
+            }
             else 
             {
                 //solutionDay1 sd1 = new solutionDay1(2);
@@ -42,6 +48,13 @@ namespace adventofcode
             //Console.Read(); 
         }
 
+        static void solve(int year, int day)
+        {
+            solve(year, day, 1);
+
+            solve(year, day, 2);
+        }
+
         static void solve(int year, int day, int part)
         {
             if(year == 2022)
@@ -51,10 +64,13 @@ namespace adventofcode
                 
                 Console.WriteLine("{0}", assembly.FullName);
 
+                var solution = $"aoc{year.ToString("D4")}.solutionDay{day.ToString("D2")}";
+                Console.WriteLine(solution);
+
                 Type type = assembly.GetType("aoc2022.solutionDay01");
                 object instance = Activator.CreateInstance(type);
 
-                MethodInfo solve = type.GetMethod("Solve");
+                MethodInfo solve = type.GetMethod($"SolvePart{part.ToString("D1")}");
 
                 solve.Invoke(instance, null);
                 
