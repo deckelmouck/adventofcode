@@ -4,6 +4,9 @@ personal adventofcode.com solution
 # my personal solution 
 using c# with dotnet core framework
 
+# overview 2022
+- day01 :star: :star:
+
 # overview 2021
 - day01
 
