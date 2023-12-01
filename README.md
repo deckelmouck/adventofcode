@@ -2,7 +2,11 @@
 personal adventofcode.com solution
 
 # my personal solution 
-using c# with dotnet core framework
+using c# with .NET 7
+
+# overview 2023
+
+# overview 2022
 
 # overview 2022
 - day01 :star: :star:
