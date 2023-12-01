@@ -33,7 +33,7 @@ namespace adventofcode
             else 
             {
                 // for testing
-                var today = new DateTime(2022, 12, 1);
+                var today = new DateTime(2022, 12, 2);
                 
                 if(start.Month == 12 && start.Day < 26)
                 {
@@ -76,9 +76,9 @@ namespace adventofcode
                 //Console.WriteLine("{0}", assembly.FullName);
 
                 var solution = $"aoc{year.ToString("D4")}.solutionDay{day.ToString("D2")}";
-                //Console.WriteLine(solution);
+                Console.WriteLine(solution);
 
-                Type type = assembly.GetType("aoc2022.solutionDay01");
+                Type type = assembly.GetType(solution);
                 object instance = Activator.CreateInstance(type);
 
                 MethodInfo solve = type.GetMethod($"SolvePart{part.ToString("D1")}");
