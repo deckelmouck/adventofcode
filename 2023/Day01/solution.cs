@@ -67,8 +67,6 @@ class solutionDay01 : ISolver
 
         int sumCalibrationValues = 0;
 
-        string[] words = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-
         foreach (var item in input)
         {
             string corrected = item;
@@ -144,10 +142,10 @@ class solutionDay01 : ISolver
                 switch (check)
                 {
                     case "one":
-                    item = item.Replace(check, "1");
+                    item = item.Replace(check, "o1e");
                     break;
                     case "two":
-                    item = item.Replace(check, "2");
+                    item = item.Replace(check, "t2o");
                     break;
                     case "six":
                     item = item.Replace(check, "6");
@@ -171,10 +169,10 @@ class solutionDay01 : ISolver
                     item = item.Replace(check, "4");
                     break;
                     case "five":
-                    item = item.Replace(check, "5");
+                    item = item.Replace(check, "5e");
                     break;
                     case "nine":
-                    item = item.Replace(check, "9");
+                    item = item.Replace(check, "n9e");
                     break;
                     default:
                     break;
@@ -192,13 +190,13 @@ class solutionDay01 : ISolver
                 switch (check)
                 {
                     case "three":
-                    item = item.Replace(check, "3");
+                    item = item.Replace(check, "t3e");
                     break;
                     case "seven":
-                    item = item.Replace(check, "7");
+                    item = item.Replace(check, "7n");
                     break;
                     case "eight":
-                    item = item.Replace(check, "8");
+                    item = item.Replace(check, "e8t");
                     break;
                     default:
                     break;
