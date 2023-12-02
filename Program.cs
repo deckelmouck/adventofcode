@@ -69,7 +69,7 @@ namespace adventofcode
 
         static void solve(int year, int day, int part)
         {
-            if(year == 2022)
+            if(year >= 2022)
             {
                 //Assembly assembly = Assembly.LoadFrom(@"C:\dev\adventofcode\bin\debug\net7.0\adventofcode.dll");
                 Assembly assembly = Assembly.GetExecutingAssembly();
