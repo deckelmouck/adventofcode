@@ -5,6 +5,8 @@ personal adventofcode.com solution
 using c# with .NET 7
 
 # overview 2023
+- day01 :star: :star:
+- day01 :star: :star:
 
 # overview 2022
 - day01 :star: :star:
