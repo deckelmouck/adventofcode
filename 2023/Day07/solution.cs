@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using adventofcode;
+using System.IO;
 
 
 namespace aoc2023;
@@ -36,15 +37,21 @@ class solutionDay07 : ISolver
         long total = 0;
         long rank = 1;
 
-        foreach (var item in cards.OrderByDescending(c => c.Handtype()).ThenBy(c => c.Strength(0)).ThenBy(c => c.Strength(1)).ThenBy(c => c.Strength(2)).ThenBy(c => c.Strength(3)).ThenBy(c => c.Strength(4)))
+        StreamWriter sw = new("2023/Day07/output");
+        using(sw)
         {
-            Console.WriteLine(item);
-            total += item.Bid * rank;
-            Console.WriteLine($"{item.Bid} * {rank}");
+            foreach (var item in cards.OrderByDescending(c => c.Handtype()).ThenBy(c => c.Strength(0)).ThenBy(c => c.Strength(1)).ThenBy(c => c.Strength(2)).ThenBy(c => c.Strength(3)).ThenBy(c => c.Strength(4)))
+            {
+                Console.WriteLine(item);
+                total += item.Bid * rank;
+                Console.WriteLine($"{item.Bid} * {rank}");
 
-            rank++;
+                sw.WriteLine($"{item} - {rank}");
+
+                rank++;
+            }
+            Console.WriteLine($"Total: {total}");
         }
-        Console.WriteLine($"Total: {total}");
     }
 
     public void SolvePart2()
