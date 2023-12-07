@@ -12,8 +12,8 @@ class solutionDay05 : ISolver
         Console.WriteLine("part 1");
 
         solutionBase sb = new();
-        var input = sb.getInputLines(@"2023/Day05/test").ToArray();
-        //var input = sb.getInputLines(@"2023/Day05/input").ToArray();
+        //var input = sb.getInputLines(@"2023/Day05/test").ToArray();
+        var input = sb.getInputLines(@"2023/Day05/input").ToArray();
 
         var firstLine = input[0].Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
@@ -24,10 +24,13 @@ class solutionDay05 : ISolver
         {
             Console.WriteLine($"seed: {seed} will be calculated");
             var s = Convert.ToInt64(seed);
+            var mapped = false;
 
             for (int i = 2; i < input.Length; i++)
             {
-                if(!input[i].Contains(':') && input[i] != "")
+                if(input[i] == "") mapped = false;
+
+                if(!input[i].Contains(':') && input[i] != "" && !mapped)
                 {
                     var inputLine = input[i].Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
@@ -38,6 +41,7 @@ class solutionDay05 : ISolver
                     if(SeedInRange(s, source, range))
                     {
                         s = destination + (s - source);
+                        mapped = true;
                     }
 
                     Console.WriteLine($"destination: {destination} source: {source} range: {range}");
@@ -53,6 +57,8 @@ class solutionDay05 : ISolver
         {
             Console.WriteLine($"seed: {seed.Key} - {seed.Value}");
         }
+
+        Console.WriteLine($"min is: {seedlist.Min(s => s.Value)}");
         
         Console.WriteLine($"still not the right result");
     }
