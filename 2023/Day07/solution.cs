@@ -17,8 +17,8 @@ class solutionDay07 : ISolver
         Console.WriteLine($"part 1");
 
         solutionBase sb = new();
-        var input = sb.getInputLines(@"2023/Day07/test");
-        //var input = sb.getInputLines(@"2023/Day07/input").ToArray();
+        //var input = sb.getInputLines(@"2023/Day07/test");
+        var input = sb.getInputLines(@"2023/Day07/input");
 
         List<CamelCard> cards = new();
 
@@ -36,7 +36,7 @@ class solutionDay07 : ISolver
         long total = 0;
         long rank = 1;
 
-        foreach (var item in cards.OrderByDescending(c => c.Handtype()).ThenByDescending(c => c.CompareHandStrenght(c.Original, c.Original)))
+        foreach (var item in cards.OrderByDescending(c => c.Handtype()).ThenBy(c => c.Strength(0)).ThenBy(c => c.Strength(1)).ThenBy(c => c.Strength(2)).ThenBy(c => c.Strength(3)).ThenBy(c => c.Strength(4)))
         {
             Console.WriteLine(item);
             total += item.Bid * rank;
@@ -50,6 +50,7 @@ class solutionDay07 : ISolver
     public void SolvePart2()
     {
         Console.WriteLine($"part 2 under development");
+
     }
 
     class CamelCard(string original, int bid)
@@ -99,89 +100,10 @@ class solutionDay07 : ISolver
             return $"{Original} - {Bid} - Type: {Handtype()}";
         }
 
-        public int CompareHandStrenght(string hand1, string hand2)
+        public int Strength(int pos)
         {
-            //string[] strength = new string[] {"A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"};
-            //char[] strength = new char[] {'A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2'};
-
             char[] strength = new char[] {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'};
-            
-            int pos = 0;
-            var hand1Strength = strength.ToList().IndexOf(hand1[pos]);
-            var hand2Strength = strength.ToList().IndexOf(hand2[pos]);
-
-            if(hand1Strength > hand2Strength)
-            {
-                return 1;
-            }
-            else if(hand1Strength < hand2Strength)
-            {
-                return -1;
-            }
-            else
-            {
-                pos++;
-                hand1Strength = strength.ToList().IndexOf(hand1[pos]);
-                hand2Strength = strength.ToList().IndexOf(hand2[pos]);
-
-                if(hand1Strength > hand2Strength)
-                {
-                    return 1;
-                }
-                else if(hand1Strength < hand2Strength)
-                {
-                    return -1;
-                }
-                else
-                {
-                    pos++;
-                    hand1Strength = strength.ToList().IndexOf(hand1[pos]);
-                    hand2Strength = strength.ToList().IndexOf(hand2[pos]);
-
-                    if(hand1Strength > hand2Strength)
-                    {
-                        return 1;
-                    }
-                    else if(hand1Strength < hand2Strength)
-                    {
-                        return -1;
-                    }
-                    else
-                    {
-                        pos++;
-                        hand1Strength = strength.ToList().IndexOf(hand1[pos]);
-                        hand2Strength = strength.ToList().IndexOf(hand2[pos]);
-
-                        if(hand1Strength > hand2Strength)
-                        {
-                            return 1;
-                        }
-                        else if(hand1Strength < hand2Strength)
-                        {
-                            return -1;
-                        }
-                        else
-                        {
-                            pos++;
-                            hand1Strength = strength.ToList().IndexOf(hand1[pos]);
-                            hand2Strength = strength.ToList().IndexOf(hand2[pos]);
-
-                            if(hand1Strength > hand2Strength)
-                            {
-                                return 1;
-                            }
-                            else if(hand1Strength < hand2Strength)
-                            {
-                                return -1;
-                            }
-                            else
-                            {
-                                return 0;
-                            }
-                        }
-                    }
-                }
-            }
+            return strength.ToList().IndexOf(Original[pos]);
         }
     }   
 }
