@@ -60,7 +60,7 @@ class solutionDay05 : ISolver
 
         Console.WriteLine($"min is: {seedlist.Min(s => s.Value)}");
         
-        Console.WriteLine($"still not the right result");
+        Console.WriteLine($"this should be right: 910845529");
     }
 
     public void SolvePart2()
