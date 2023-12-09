@@ -19,32 +19,35 @@ class solutionDay09 : ISolver
 
         for (int i = 0; i < input.Length; i++)
         {
-            var line = input[i].Split(" ");
+            var inputLine = input[i] + " 0";
+            //Console.WriteLine(inputLine);
+
+            var line = inputLine.Split(" ");
             //Console.WriteLine(line.Length);
 
             //hint found - next value of last values each sequence
             List<long> lastValues = new List<long>();
-            
+
             //initial sequence length
-            int sequenceLength = line.Length;
+            int sequenceLength = line.Length - 1;
 
             //for temporary storage of last line
             long[] lastLine = new long[sequenceLength];
 
             //init with starting sequence
             lastLine = line.Select(x => Convert.ToInt64(x)).ToArray();
-
-            //save last value for later
-            lastValues.Add(lastLine[^1]);
-
-            //ArrayOutput(lastLine);
             
-            for (int l = 0; l < sequenceLength; l++)
+            //save last value for later
+            //lastValues.Add(lastLine[^1]);
+
+            ArrayOutput(lastLine);
+            
+            for (int l = 0; l <= sequenceLength; l++)
             {
                 //reduce sequence length for next iteration
-                sequenceLength--;
+                //sequenceLength--;
 
-                long[] newline = new long[sequenceLength];
+                long[] newline = new long[sequenceLength - l];
 
                 //create new sequence
                 for (int j = 0; j < newline.Length; j++)
@@ -54,22 +57,13 @@ class solutionDay09 : ISolver
 
                     long newValue = right - left;
 
-                    // if(left > right)
-                    // {
-                    //     newValue = left - right;
-                    // }
-                    // else
-                    // {
-                    //     newValue = right - left;
-                    // }
-
                     newline[j] = newValue;
                 }
 
                 //save last value for later
-                lastValues.Add(newline[^1]);
+                //lastValues.Add(newline[^1]);
 
-                //ArrayOutput(newline);
+                ArrayOutput(newline);
 
                 
 
@@ -80,13 +74,18 @@ class solutionDay09 : ISolver
                 //var sum = newline.Sum();
 
                 //check if all values are 0
-                if(ArrayFullOfZeros(newline))
+                // if(ArrayFullOfZeros(newline))
+                // {
+                //     //Console.WriteLine($"line {i} is a solution");
+                //     break;
+                // }
+                if(newline.Length == 1)
                 {
-                    //Console.WriteLine($"line {i} is a solution");
+                    lastValues.Add(newline[0] * -1);
                     break;
                 }
             }
-                       
+            //lastValues.Add(lastLine[0] * -1);           
             Console.WriteLine($"{lastValues.Sum()}");
             solution += lastValues.Sum();
         }
