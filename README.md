@@ -9,8 +9,9 @@ using c# with .NET 7
 - day02 :star: :star:
 - day03 :star:
 - day04 :star: :star:
-- day05
+- day05 :star:
 - day06 :star: :star:
+- day07 :star:
 
 # overview 2022
 - day01 :star: :star:

@@ -12,107 +12,71 @@ class solutionDay05 : ISolver
         Console.WriteLine("part 1");
 
         solutionBase sb = new();
-        var input = sb.getInputLines(@"2023/Day05/testone").ToArray();
-        //var input = sb.getInputLines(@"2023/Day05/input").ToArray();
+        //var input = sb.getInputLines(@"2023/Day05/test").ToArray();
+        var input = sb.getInputLines(@"2023/Day05/input").ToArray();
 
         var firstLine = input[0].Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
         var seeds = firstLine.Where(seed => seed.Any(char.IsDigit));
+        Dictionary<long,long> seedlist = new();
+
         foreach(var seed in seeds)
         {
-            Console.WriteLine(seed);
-        }
+            Console.WriteLine($"seed: {seed} will be calculated");
+            var s = Convert.ToInt64(seed);
+            var mapped = false;
 
-        //input.Remove(input[0]);
-
-        // List<string> maps = new();
-
-        // foreach (var line in input)
-        // {
-        //     if(line.Length > 0 && !line.Contains(':'))
-        //     {
-        //         maps.Add(line);
-        //     }
-        // }
-        
-        //inital map
-        int[] test = new int[100];
-        for (int i = 0; i < test.Length; i++)
-        {
-            test[i] = i;
-        }
-
-        int[] testmap = new int[100];
-
-        for (int a = 2; a < input.Length; a++)
-        {
-            //Console.WriteLine(input[a].Length);
-            if(input[a].Contains(':'))
+            for (int i = 2; i < input.Length; i++)
             {
-                Console.WriteLine(input[a]);
-                Array.Copy(test, testmap, test.Length);
-            }
-            else if (input[a].Length == 0)
-            {
-                Console.WriteLine(input[a]);
-                //Array.Copy(testmap, test, test.Length);
+                if(input[i] == "") mapped = false;
 
-                for (int i = 0; i < 100; i++)
+                if(!input[i].Contains(':') && input[i] != "" && !mapped)
                 {
-                    //Console.WriteLine($"{i}: test {test[i]} - testmap {testmap[i]}");
-                    test[i] = testmap[i];
-                    testmap[i] = 1;
-                    //Console.WriteLine($"{i}: test {test[i]} - testmap {testmap[i]}");
-                    //Console.WriteLine($"------------------");
-                }
-            }
-            else
-            {
-                Console.WriteLine(input[a]);
-                
-                var item = input[a];
-                var destinationRangeStart = Convert.ToInt64(item.Split(' ')[0]);
-                var sourceRange = Convert.ToInt64(item.Split(' ')[1]);
-                var rangeLength = Convert.ToInt64(item.Split(' ')[2]);
+                    var inputLine = input[i].Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-                for (int i = 0; i < rangeLength; i++)
-                {
-                    testmap[sourceRange + i] = test[destinationRangeStart + i];
+                    var destination = Convert.ToInt64(inputLine[0]);
+                    var source = Convert.ToInt64(inputLine[1]);
+                    var range = Convert.ToInt64(inputLine[2]);
+
+                    if(SeedInRange(s, source, range))
+                    {
+                        s = destination + (s - source);
+                        mapped = true;
+                    }
+
+                    Console.WriteLine($"destination: {destination} source: {source} range: {range}");
                 }
+                Console.WriteLine($"seed: {seed} - {s}");
             }
+
+            seedlist.Add(Convert.ToInt64(seed), s);
+
         }
+
+        foreach (var seed in seedlist)
+        {
+            Console.WriteLine($"seed: {seed.Key} - {seed.Value}");
+        }
+
+        Console.WriteLine($"min is: {seedlist.Min(s => s.Value)}");
         
-        //foreach (var item in maps)
-        // for(int m = 0; m < maps.Count; m++)
-        // {
-        //     var item = maps[m];
-        //     var destinationRangeStart = Convert.ToInt64(item.Split(' ')[0]);
-        //     var sourceRange = Convert.ToInt64(item.Split(' ')[1]);
-        //     var rangeLength = Convert.ToInt64(item.Split(' ')[2]);
-
-        //     for (int i = 0; i < rangeLength; i++)
-        //     {
-        //         testmap[sourceRange + i] = test[destinationRangeStart + i];
-        //     }
-        // }
-
-        //Console.WriteLine(seeds);
-        // for (int i = 0; i < 100; i++)
-        // {
-        //     Console.WriteLine($"test{i}: {testmap[i]}");
-        // }
-        Console.WriteLine($"testmap");
-        Console.WriteLine($"79: {testmap[79]}");
-        Console.WriteLine($"14: {testmap[14]}");
-        Console.WriteLine($"55: {testmap[55]}");
-        Console.WriteLine($"13: {testmap[13]}");
-
-        
-        Console.WriteLine($"still not the right result");
+        Console.WriteLine($"this should be right: 910845529");
     }
 
     public void SolvePart2()
     {
         Console.WriteLine("under developement");
+    }
+
+    public bool SeedInRange(Int64 seed, Int64 source, Int64 range)
+    {
+        if(seed >= source && seed < (source + range))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
