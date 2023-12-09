@@ -41,7 +41,10 @@ class solutionDay09 : ISolver
             
             for (int l = 0; l < sequenceLength; l++)
             {
-                long[] newline = new long[sequenceLength - 1];
+                //reduce sequence length for next iteration
+                sequenceLength--;
+
+                long[] newline = new long[sequenceLength];
 
                 //create new sequence
                 for (int j = 0; j < newline.Length; j++)
@@ -68,15 +71,16 @@ class solutionDay09 : ISolver
 
                 //ArrayOutput(newline);
 
-                //reduce sequence length for next iteration
-                sequenceLength--;
+                
 
                 //put new sequence in temp storage
                 lastLine = newline;
 
                 //check if all values are 0
-                var sum = newline.Sum();
-                if(sum == 0)
+                //var sum = newline.Sum();
+
+                //check if all values are 0
+                if(ArrayFullOfZeros(newline))
                 {
                     //Console.WriteLine($"line {i} is a solution");
                     break;
@@ -101,5 +105,17 @@ class solutionDay09 : ISolver
             Console.Write($"{item} ");
         }
         Console.WriteLine();
+    }
+
+    public bool ArrayFullOfZeros(long[] array)
+    {
+        foreach (var item in array)
+        {
+            if(item != 0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
