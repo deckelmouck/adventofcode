@@ -3,12 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 using adventofcode;
 
 namespace aoc2023;
 
 public class solutionDay10 : ISolver
 {
+    List<Pipe> _visitedPipes = new List<Pipe>();
+
+
     public void SolvePart1()
     {
         Console.WriteLine($"part 1:");
@@ -112,6 +116,8 @@ public class solutionDay10 : ISolver
             }
         }
 
+        _visitedPipes = visitedPipes;
+
         Console.WriteLine($"found start again at {currentPipe.x},{currentPipe.y} after {steps} steps");
         var result = (steps + 1) / 2;
         Console.WriteLine($"result: {result}");
@@ -161,6 +167,62 @@ public class solutionDay10 : ISolver
     public void SolvePart2()
     {
         Console.WriteLine($"part 2 under development");
+
+        solutionBase sb = new solutionBase();
+        //var input = sb.getInputLines(@"2023/Day10/testone").ToArray();
+        //var input = sb.getInputLines(@"2023/Day10/testtwo").ToArray();
+        var input = sb.getInputLines(@"2023/Day10/input").ToArray();
+
+        char[,] map = new char[input.Length, input[0].Length];
+        for (int y = 0; y < input.Length; y++)
+        {
+            //Console.WriteLine($"y = {y} ,input_y = {input[y]}");
+            var line = input[y].ToArray();
+            for (int x = 0; x < line.Length; x++)
+            {
+                var dot = _visitedPipes.Contains(new Pipe('.', x, y));
+                if(dot)
+                {
+                    map[x,y] = '.';
+                }
+                else
+                {
+                    map[x,y] = line[x];
+                }
+            }
+        }
+
+
+
+        List<string> mapLines = new List<string>();
+        for(int y = 0; y < map.GetLength(1); y++)
+        {
+            string line = "";
+            for(int x = 0; x < map.GetLength(0); x++)
+            {
+                line += map[x,y];
+            }
+            mapLines.Add(Regex.Replace(Regex.Replace(line.ToString(), "F-*7|L-*J", string.Empty), "F-*J|L-*7", "|"));
+
+            Console.WriteLine(line);
+            Console.WriteLine(mapLines.Last());
+        }
+
+        int count = 0;
+
+        foreach (var l in mapLines)
+        {
+            int parity = 0;
+            foreach(var c in l)
+            {
+                if (c == '|') parity++;
+                if (c == '.' && parity % 2 == 1) count++;
+            }
+        }
+
+        Console.WriteLine($"count is: {count}");
+
+        //312 is too low
     }
 
     public enum Direction
