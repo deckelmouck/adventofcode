@@ -20,9 +20,10 @@ public class solutionDay10 : ISolver
         solutionBase sb = new solutionBase();
         //var input = sb.getInputLines(@"2023/Day10/testone").ToArray();
         //var input = sb.getInputLines(@"2023/Day10/testtwo").ToArray();
-        var input = sb.getInputLines(@"2023/Day10/input").ToArray();
+        //var input = sb.getInputLines(@"2023/Day10/input").ToArray();
+        var input = sb.getInputLines(@"2023/Day10/testparttwo").ToArray();
 
-        char[,] map = new char[input.Length, input[0].Length];
+        char[,] map = new char[input[0].Length, input.Length];
         for (int y = 0; y < input.Length; y++)
         {
             //Console.WriteLine($"y = {y} ,input_y = {input[y]}");
@@ -171,58 +172,272 @@ public class solutionDay10 : ISolver
         solutionBase sb = new solutionBase();
         //var input = sb.getInputLines(@"2023/Day10/testone").ToArray();
         //var input = sb.getInputLines(@"2023/Day10/testtwo").ToArray();
-        var input = sb.getInputLines(@"2023/Day10/input").ToArray();
+        //var input = sb.getInputLines(@"2023/Day10/input").ToArray();
+        var input = sb.getInputLines(@"2023/Day10/testparttwo").ToArray();
 
-        char[,] map = new char[input.Length, input[0].Length];
+        char[,] map = new char[input[0].Length, input.Length];
         for (int y = 0; y < input.Length; y++)
         {
             //Console.WriteLine($"y = {y} ,input_y = {input[y]}");
             var line = input[y].ToArray();
             for (int x = 0; x < line.Length; x++)
             {
-                var dot = _visitedPipes.Contains(new Pipe('.', x, y));
-                if(dot)
+                map[x,y] = line[x];
+            }
+        }
+
+        //for testing
+        // for(int y = 0; y < map.GetLength(1); y++)
+        // {
+        //     for(int x = 0; x < map.GetLength(0); x++)
+        //     {
+        //         Console.Write(map[x,y]);
+        //     }
+        //     Console.WriteLine();
+        // }
+
+        //locate the S as starting point
+        //find the two connected points
+        //go both two ways and count the steps
+        //repeat until both ways are meeting each other
+
+        //find the S
+        int sx = 0;
+        int sy = 0;
+        for(int y = 0; y < map.GetLength(1); y++)
+        {
+            for(int x = 0; x < map.GetLength(0); x++)
+            {
+                if(map[x,y] == 'S')
                 {
-                    map[x,y] = '.';
-                }
-                else
-                {
-                    map[x,y] = line[x];
+                    sx = x;
+                    sy = y;
                 }
             }
         }
 
+        Console.WriteLine($"S is at {sx},{sy}");
 
+        //find the two connected points
+        //list all points around the S
+        //check if there are two points that connect as next step to the starting point
 
-        List<string> mapLines = new List<string>();
-        for(int y = 0; y < map.GetLength(1); y++)
+        List<Pipe> visitedPipesPartTwo = new();
+
+        Pipe startPipe = new Pipe('S', sx, sy);
+        visitedPipesPartTwo.Add(new Pipe('.', sx, sy));
+
+        Pipe currentPipe = startPipe;
+        Pipe nextPipe = startPipe;
+        Pipe beforePipe = startPipe;
+
+        int steps = 0;
+        bool foundStart = false;
+        Console.WriteLine($"start at {startPipe}");
+        //find the next pipe
+
+        while(!foundStart)
         {
-            string line = "";
-            for(int x = 0; x < map.GetLength(0); x++)
-            {
-                line += map[x,y];
-            }
-            mapLines.Add(Regex.Replace(Regex.Replace(line.ToString(), "F-*7|L-*J", string.Empty), "F-*J|L-*7", "|"));
+            //Console.WriteLine($"current pipe: {currentPipe}");
 
-            Console.WriteLine(line);
-            Console.WriteLine(mapLines.Last());
+            foreach (var item in currentPipe.GetNeighboor(beforePipe))
+            {
+                //Console.WriteLine($"neighboor: {item}");
+                var neighboorPipe = new Pipe(map[item.Item1, item.Item2], item.Item1, item.Item2);
+                //Console.WriteLine($"check neighboor pipe: {neighboorPipe}");
+
+                if(neighboorPipe != beforePipe)
+                {
+                    if (PipesAreConnected(currentPipe, neighboorPipe))
+                    {
+                        if(neighboorPipe.pipeChar == 'S' && steps > 3)
+                        {
+                            //Console.WriteLine($"found start again at {currentPipe.x},{currentPipe.y} after {steps} steps");
+                            foundStart = true;
+                        }
+                        else if (neighboorPipe.pipeChar != 'S')
+                        {
+                            //Console.WriteLine($"found connected pipe: {neighboorPipe}");
+                            visitedPipesPartTwo.Add(new Pipe('.', neighboorPipe.x, neighboorPipe.y));
+                            beforePipe = currentPipe;
+                            currentPipe = neighboorPipe;
+                            steps++;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        //_visitedPipes = visitedPipes;
+
+
+        Console.WriteLine($"visited pipes: {visitedPipesPartTwo.Count}");
+
+        char[,] mapCleaned = new char[input[0].Length, input.Length];
+
+        mapCleaned = map;
+
+        foreach (var item in visitedPipesPartTwo)
+        {
+            mapCleaned[item.x, item.y] = 'x';
         }
 
         int count = 0;
 
-        foreach (var l in mapLines)
+        for(int y = 0; y < mapCleaned.GetLength(1); y++)
         {
-            int parity = 0;
-            foreach(var c in l)
+            for(int x = 0; x < mapCleaned.GetLength(0); x++)
             {
-                if (c == '|') parity++;
-                if (c == '.' && parity % 2 == 1) count++;
+                int coordx = x;
+                int coordy = y;
+
+                if(mapCleaned[x,y] != 'x')
+                {
+                    if(IsInside(coordx, coordy, mapCleaned))
+                    {
+                        count++;
+                        //mapCleaned[x,y] = 'I';
+                    }
+                }
             }
+            //Console.WriteLine();
+        }
+
+
+        // for (int y = 0; y < input.Length; y++)
+        // {
+        //     //Console.WriteLine($"y = {y} ,input_y = {input[y]}");
+        //     var line = input[y].ToArray();
+        //     for (int x = 0; x < line.Length; x++)
+        //     {
+        //         var test51 = visitedPipesPartTwo.Contains(new Pipe('.', 5, 1));
+        //         var moep = new Pipe('.', 5, 1);
+        //         var bla = visitedPipesPartTwo.Contains(moep);
+        //         var test52 = visitedPipesPartTwo.Select(p => p.x == 5 && p.y == 1).FirstOrDefault();
+
+        //         //var test61 = visitedPipes.Contains(test52);
+        //         visitedPipesPartTwo.Add(moep);
+                
+        //          bla = visitedPipesPartTwo.Contains(moep);
+        //         var test53 = visitedPipesPartTwo.Select(p => p.x == 5 && p.y == 1).FirstOrDefault();
+
+        //         var dot = visitedPipesPartTwo.Contains(new Pipe('.', x, y));
+        //         if(dot)
+        //         {
+        //             mapCleaned[x,y] = 'x';
+        //         }
+        //         else
+        //         {
+        //             mapCleaned[x,y] = line[x];
+        //         }
+        //     }
+        // }
+
+        // for debugging test input..
+        for(int y = 0; y < mapCleaned.GetLength(1); y++)
+        {
+            for(int x = 0; x < mapCleaned.GetLength(0); x++)
+            {
+                Console.Write(mapCleaned[x,y]);
+            }
+            Console.WriteLine();
         }
 
         Console.WriteLine($"count is: {count}");
 
+        //1345
+
+        // List<string> mapLines = new List<string>();
+        // for(int y = 0; y < map.GetLength(1); y++)
+        // {
+        //     string line = "";
+        //     for(int x = 0; x < map.GetLength(0); x++)
+        //     {
+        //         line += map[x,y];
+        //     }
+        //     mapLines.Add(Regex.Replace(Regex.Replace(line.ToString(), "F-*7|L-*J", string.Empty), "F-*J|L-*7", "|"));
+
+        //     Console.WriteLine(line);
+        //     Console.WriteLine(mapLines.Last());
+        // }
+
+        // int count = 0;
+
+        // foreach (var l in mapLines)
+        // {
+        //     int parity = 0;
+        //     foreach(var c in l)
+        //     {
+        //         if (c == '|') parity++;
+        //         if (c == '.' && parity % 2 == 1) count++;
+        //     }
+        // }
+
+        // Console.WriteLine($"count is: {count}");
+
         //312 is too low
+    }
+
+    public bool IsInside(int x, int y, char[,] map)
+    {
+        var before = map[x,y];
+        if(before != 'x')
+        {
+            before = '.';
+        }
+        int count = 0;
+
+        for (int i = 0; i < map.GetLength(1) - y; i++)
+        {
+            var actual = map[x, y + i];
+            if(actual != 'x')
+            {
+                actual = '.';
+            }
+            if(before != actual)
+            {
+                before = actual;
+                count++;
+            }
+        }
+        if(count % 2 == 0)
+        {
+            if(OutX(x, y, map) == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public int OutX (int x, int y, char[,] map)
+    {
+        int count = 0;
+        var before = map[x,y];
+        if(before != 'x')
+        {
+            before = '.';
+        }
+
+        for (int i = 0; i < map.GetLength(0) - x; i++)
+        {
+            var actual = map[x + i, y];
+            if(actual != 'x')
+            {
+                actual = '.';
+            }
+            if(before != actual)
+            {
+                before = actual;
+                count++;
+            }
+        }
+        return count;
     }
 
     public enum Direction
@@ -318,7 +533,7 @@ public class solutionDay10 : ISolver
         {
             List<(int,int)> neighboors = new List<(int,int)>();
 
-            if(Directions.Contains(Direction.North))
+            if(Directions.Contains(Direction.North) && y - 1 >= 0)
             {
                 neighboors.Add((x, y - 1));
             }
@@ -330,7 +545,7 @@ public class solutionDay10 : ISolver
             {
                 neighboors.Add((x + 1, y));
             }
-            if(Directions.Contains(Direction.West))
+            if(Directions.Contains(Direction.West) && x - 1 >= 0)
             {
                 neighboors.Add((x - 1, y));
             }
