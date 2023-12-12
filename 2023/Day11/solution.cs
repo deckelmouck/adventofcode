@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using adventofcode;
 
 namespace aoc2023;
@@ -30,10 +31,10 @@ public class solutionDay11 : ISolver
 
         List<Galaxy> galaxies = new();
 
-        for (int y = 0; y < height; y++)
+        for (long y = 0; y < height; y++)
         {
             var line = input[y];
-            for (int x = 0; x < width; x++)
+            for (long x = 0; x < width; x++)
             {
                 if (grid[x, y] == '#')
                 {
@@ -60,17 +61,90 @@ public class solutionDay11 : ISolver
 
         Console.WriteLine($"Connections: {connections.Count}");
 
+        //list all rows without Galaxy
+        List<long> rows = new();
+
+        for(long y = 0; y < height; y++)
+        {
+            bool hasGalaxy = false;
+            for(long x = 0; x < width; x++)
+            {
+                if(grid[x, y] == '#')
+                {
+                    hasGalaxy = true;
+                    break;
+                }
+            }
+
+            if(!hasGalaxy)
+            {
+                rows.Add(y);
+            }
+        }
+
+        //list all columns without Galaxy  
+        List<int> columns = new();
+
+        for(int x = 0; x < width; x++)
+        {
+            bool hasGalaxy = false;
+            for(int y = 0; y < height; y++)
+            {
+                if(grid[x, y] == '#')
+                {
+                    hasGalaxy = true;
+                    break;
+                }
+            }
+
+            if(!hasGalaxy)
+            {
+                columns.Add(x);
+            }
+        }
+
+        Console.WriteLine($"Rows: {rows.Count}");
+        Console.WriteLine($"Columns: {columns.Count}");
+
+        //Manhatten distance between galaxies without expansion
         foreach(var connection in connections)
         {
             var galaxy1 = connection.Item1;
             var galaxy2 = connection.Item2;
 
             //calculate manhatten distance between galaxies
-            int distance = Math.Abs(galaxy1.X - galaxy2.X) + Math.Abs(galaxy1.Y - galaxy2.Y);
+            long distance = Math.Abs(galaxy1.X - galaxy2.X) + Math.Abs(galaxy1.Y - galaxy2.Y);
 
-            Console.WriteLine($"Distance between {galaxy1.Id} and {galaxy2.Id} is {distance}");
+            //Console.WriteLine($"Distance between {galaxy1.Id} and {galaxy2.Id} is {distance}");
         }
 
+        long expansionLevel = 1;
+        long sum = 0;
+        long sum2 = 0;
+        //Manhatten distance between galaxies with expansion
+        foreach(var connection in connections)
+        {
+            var galaxy1 = connection.Item1;
+            var galaxy2 = connection.Item2;
+
+            long expansionRows = rows.Count(row => row >= galaxy1.Y && row <= galaxy2.Y || row >= galaxy2.Y && row <= galaxy1.Y );
+            long expansionColumns = columns.Count(column => column >= galaxy1.X && column <= galaxy2.X || column >= galaxy2.X && column <= galaxy1.X);
+
+            //Console.WriteLine($"Expansion rows: {expansionRows}, galaxy1: {galaxy1.Y}, galaxy2: {galaxy2.Y}");
+            //Console.WriteLine($"Expansion columns: {expansionColumns}, galaxy1: {galaxy1.X}, galaxy2: {galaxy2.X}");
+
+            //calculate manhatten distance between galaxies
+            long distance = Math.Abs(galaxy1.X - galaxy2.X) + (expansionLevel * expansionColumns) + Math.Abs(galaxy1.Y - galaxy2.Y) + (expansionLevel * expansionRows);
+            sum += distance;
+            //Console.WriteLine($"Distance between {galaxy1.Id + 1} and {galaxy2.Id + 1} with expansion is {distance} - {expansionRows} - {expansionColumns}");
+            
+            var expansionLevel2 = 999999;
+            long distance2 = Math.Abs(galaxy1.X - galaxy2.X) + (expansionLevel2 * expansionColumns) + Math.Abs(galaxy1.Y - galaxy2.Y) + (expansionLevel2 * expansionRows);
+            sum2 += distance2;
+        }
+        Console.WriteLine($"Sum: {sum}");
+        Console.WriteLine($"Sum2: {sum2}");
+        // 82000210 is too low
     }
 
     public void SolvePart2()
@@ -78,12 +152,14 @@ public class solutionDay11 : ISolver
         Console.WriteLine($"part 2 under development");
     }
 
-    class Galaxy (int id, int x, int y)
+    class Galaxy (long id, long x, long y)
     {
-        public int Id { get; set; } = id;
-        public int X { get; set; } = x;
-        public int Y { get; set; } = y;
+        public long Id { get; set; } = id;
+        public long X { get; set; } = x;
+        public long Y { get; set; } = y;
     }
+
+
 
     
 }
