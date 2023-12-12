@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using adventofcode;
 
 namespace aoc2023;
@@ -12,8 +13,8 @@ public class solutionDay11 : ISolver
         Console.WriteLine($"part 1");
 
         solutionBase sb = new();
-        //var input = sb.getInputLines(@"2023/Day11/input").ToArray();
-        var input = sb.getInputLines(@"2023/Day11/test").ToArray();
+        var input = sb.getInputLines(@"2023/Day11/input").ToArray();
+        //var input = sb.getInputLines(@"2023/Day11/test").ToArray();
 
         int width = input[0].Length;
         int height = input.Length;
@@ -120,7 +121,7 @@ public class solutionDay11 : ISolver
 
         long expansionLevel = 1;
         long sum = 0;
-        long sum2 = 0;
+        BigInteger sum2 = 0;
         //Manhatten distance between galaxies with expansion
         foreach(var connection in connections)
         {
@@ -139,12 +140,16 @@ public class solutionDay11 : ISolver
             //Console.WriteLine($"Distance between {galaxy1.Id + 1} and {galaxy2.Id + 1} with expansion is {distance} - {expansionRows} - {expansionColumns}");
             
             var expansionLevel2 = 999999;
-            long distance2 = Math.Abs(galaxy1.X - galaxy2.X) + (expansionLevel2 * expansionColumns) + Math.Abs(galaxy1.Y - galaxy2.Y) + (expansionLevel2 * expansionRows);
+            BigInteger distance2 = Math.Abs(galaxy1.X - galaxy2.X) + (expansionLevel2 * expansionColumns) + Math.Abs(galaxy1.Y - galaxy2.Y) + (expansionLevel2 * expansionRows);
+
+            Console.WriteLine($"{distance2}");
+
             sum2 += distance2;
         }
         Console.WriteLine($"Sum: {sum}");
         Console.WriteLine($"Sum2: {sum2}");
         // 82000210 is too low
+        // haha, forgot to change from test to input :D
     }
 
     public void SolvePart2()
