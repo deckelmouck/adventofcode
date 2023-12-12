@@ -10,7 +10,7 @@ namespace aoc2023;
 
 public class solutionDay10 : ISolver
 {
-    List<Pipe> _visitedPipes = new List<Pipe>();
+    public List<Pipe> _visitedPipes = new List<Pipe>();
 
 
     public void SolvePart1()
@@ -172,8 +172,8 @@ public class solutionDay10 : ISolver
         solutionBase sb = new solutionBase();
         //var input = sb.getInputLines(@"2023/Day10/testone").ToArray();
         //var input = sb.getInputLines(@"2023/Day10/testtwo").ToArray();
-        //var input = sb.getInputLines(@"2023/Day10/input").ToArray();
-        var input = sb.getInputLines(@"2023/Day10/testparttwo").ToArray();
+        var input = sb.getInputLines(@"2023/Day10/input").ToArray();
+        //var input = sb.getInputLines(@"2023/Day10/testparttwo").ToArray();
 
         char[,] map = new char[input[0].Length, input.Length];
         for (int y = 0; y < input.Length; y++)
@@ -221,11 +221,11 @@ public class solutionDay10 : ISolver
         //find the two connected points
         //list all points around the S
         //check if there are two points that connect as next step to the starting point
-
+        _visitedPipes.Clear();
         List<Pipe> visitedPipesPartTwo = new();
 
         Pipe startPipe = new Pipe('S', sx, sy);
-        visitedPipesPartTwo.Add(new Pipe('.', sx, sy));
+        //visitedPipesPartTwo.Add(new Pipe('.', sx, sy));
 
         Pipe currentPipe = startPipe;
         Pipe nextPipe = startPipe;
@@ -253,12 +253,13 @@ public class solutionDay10 : ISolver
                         if(neighboorPipe.pipeChar == 'S' && steps > 3)
                         {
                             //Console.WriteLine($"found start again at {currentPipe.x},{currentPipe.y} after {steps} steps");
+                            visitedPipesPartTwo.Add(neighboorPipe);
                             foundStart = true;
                         }
                         else if (neighboorPipe.pipeChar != 'S')
                         {
                             //Console.WriteLine($"found connected pipe: {neighboorPipe}");
-                            visitedPipesPartTwo.Add(new Pipe('.', neighboorPipe.x, neighboorPipe.y));
+                            visitedPipesPartTwo.Add(neighboorPipe);
                             beforePipe = currentPipe;
                             currentPipe = neighboorPipe;
                             steps++;
@@ -269,32 +270,34 @@ public class solutionDay10 : ISolver
             }
         }
 
-        //_visitedPipes = visitedPipes;
+        _visitedPipes = visitedPipesPartTwo;
 
-
+        Console.WriteLine($"visited pipes: {_visitedPipes.Count}");
         Console.WriteLine($"visited pipes: {visitedPipesPartTwo.Count}");
 
-        char[,] mapCleaned = new char[input[0].Length, input.Length];
+        // char[,] mapCleaned = new char[input[0].Length, input.Length];
 
-        mapCleaned = map;
+        // mapCleaned = map;
 
-        foreach (var item in visitedPipesPartTwo)
-        {
-            mapCleaned[item.x, item.y] = 'x';
-        }
+        // foreach (var item in visitedPipesPartTwo)
+        // {
+        //     mapCleaned[item.x, item.y] = 'x';
+        // }
 
         int count = 0;
 
-        for(int y = 0; y < mapCleaned.GetLength(1); y++)
+        for(int y = 0; y < map.GetLength(1); y++)
         {
-            for(int x = 0; x < mapCleaned.GetLength(0); x++)
+            for(int x = 0; x < map.GetLength(0); x++)
             {
                 int coordx = x;
                 int coordy = y;
 
-                if(mapCleaned[x,y] != 'x')
+                Pipe pipe = new Pipe(map[x,y], x, y);
+
+                if(!visitedPipesPartTwo.Contains(pipe))
                 {
-                    if(IsInside(coordx, coordy, mapCleaned))
+                    if(IsInside(coordx, coordy, map, visitedPipesPartTwo))
                     {
                         count++;
                         //mapCleaned[x,y] = 'I';
@@ -335,18 +338,22 @@ public class solutionDay10 : ISolver
         // }
 
         // for debugging test input..
-        for(int y = 0; y < mapCleaned.GetLength(1); y++)
+        for(int y = 0; y < map.GetLength(1); y++)
         {
-            for(int x = 0; x < mapCleaned.GetLength(0); x++)
+            for(int x = 0; x < map.GetLength(0); x++)
             {
-                Console.Write(mapCleaned[x,y]);
+                Console.Write(map[x,y]);
             }
             Console.WriteLine();
         }
 
         Console.WriteLine($"count is: {count}");
 
-        //1345
+        // 1345 old
+        // 1846 is wrong :with |LF
+        // 1819 is wrong :with S|LF
+        // 1615 is wrong :with S-7F
+        // 1618 is wrong :with -7F
 
         // List<string> mapLines = new List<string>();
         // for(int y = 0; y < map.GetLength(1); y++)
@@ -379,34 +386,25 @@ public class solutionDay10 : ISolver
         //312 is too low
     }
 
+
     public bool IsInside(int x, int y, char[,] map)
     {
-        var before = map[x,y];
-        if(before != 'x')
-        {
-            before = '.';
-        }
         int count = 0;
+        var actual = map[x,y];
+        var actualPipe = new Pipe(actual, x, y);
 
         for (int i = 0; i < map.GetLength(1) - y; i++)
-        {
-            var actual = map[x, y + i];
-            if(actual != 'x')
-            {
-                actual = '.';
-            }
-            if(before != actual)
-            {
-                before = actual;
-                count++;
+        {   
+            if( _visitedPipes.Contains(actualPipe))
+            {   
+                if("-7F".Contains(actual)) //"|LJ"
+                {
+                    count++;
+                }
             }
         }
-        if(count % 2 == 0)
+        if(count % 2 == 1)
         {
-            if(OutX(x, y, map) == 0)
-            {
-                return false;
-            }
             return true;
         }
         else
@@ -414,6 +412,36 @@ public class solutionDay10 : ISolver
             return false;
         }
     }
+
+    //visitedPipesPartTwo
+    public bool IsInside(int x, int y, char[,] map, List<Pipe> visitedPipesPartTwo)
+    {
+        int count = 0;
+        var actual = map[x,y];
+        
+        for (int i = 0; i < map.GetLength(1) - y; i++)
+        {   
+            //Console.WriteLine($"check: {actualPipe}");
+            var toCheck = new Pipe(map[x,y+i], x, y+i);
+            if( visitedPipesPartTwo.Contains(toCheck))
+            {   
+                if("-7F".Contains(map[x,y+i])) //"|LJ" "-7F"
+                {
+                    count++;
+                    //Console.WriteLine($"inside: {x},{y+i}");
+                }
+            }            
+        }
+        if(count % 2 == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
     public int OutX (int x, int y, char[,] map)
     {
@@ -450,7 +478,7 @@ public class solutionDay10 : ISolver
         Start
     }
 
-    public class Pipe
+    public class Pipe : IEquatable<Pipe>
     {
         public readonly int x;
         public readonly int y;
@@ -557,6 +585,19 @@ public class solutionDay10 : ISolver
         public override string ToString()
         {
             return $"Pipe '{pipeChar}' at {x},{y} with {Directions.Count} directions";
+        }
+
+        public bool Equals(Pipe other)
+        {
+            if(other == null)
+            {
+                return false;
+            }
+            if(this.x == other.x && this.y == other.y)
+            {
+                return true;
+            }
+            return false;
         }
     }
 
