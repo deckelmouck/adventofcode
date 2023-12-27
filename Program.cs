@@ -33,7 +33,7 @@ namespace adventofcode
             else 
             {
                 // for testing
-                var today = new DateTime(2022, 12, 2);
+                var today = new DateTime(2023, 10, 1);
                 
                 if(start.Month == 12 && start.Day < 26)
                 {

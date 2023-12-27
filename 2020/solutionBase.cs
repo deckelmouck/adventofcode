@@ -157,5 +157,28 @@ namespace adventofcode
                 throw;
             }
         }
+
+        public string getInputString(string filename)
+        {
+            string inputString = "";
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        inputString = inputString + line;
+                    }
+                }
+                return inputString;
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }

@@ -12,6 +12,15 @@ using c# with .NET 7
 - day05 :star:
 - day06 :star: :star:
 - day07 :star:
+- day08 :star: :star:
+- day09 :star: :star:
+- day10 
+- day11 :star: :star:
+- day12 :star:
+- day13
+- day14 :star: :star:
+- day15 :star:
+- day16
 
 # overview 2022
 - day01 :star: :star:
