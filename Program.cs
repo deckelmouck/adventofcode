@@ -4,12 +4,18 @@ using System.Reflection;
 namespace adventofcode;
 class Program
 {
-    static int year {get; set;}
-    static int day {get; set;}
-    static int part {get;set;}
-
     static void Main(string[] args)
     {
+        Application app = new Application();
+        app.Run(args);
+    }
+
+    static void OldMain(string[] args)
+    {
+        int year = 0;
+        int day = 0;
+        int part = 1;
+
         DateTime start = DateTime.Now;
         Console.WriteLine("Hello to adventofcode!");
 
