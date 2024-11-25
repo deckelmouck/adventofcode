@@ -23,6 +23,6 @@ public abstract class BaseSolution
 
     public string GetInputFilePath(string fileName = "input")
     {
-        return Path.Combine(Environment.CurrentDirectory, GetYear(), $"Day{GetDay()}", fileName);
+        return Path.Combine(Environment.CurrentDirectory,"input", GetYear(), $"Day{GetDay()}", fileName);
     }
 }

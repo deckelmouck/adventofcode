@@ -4,4 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <!-- <LangVersion>latest</LangVersion> -->
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="input/2024/" />
+    <Folder Include="input/2024/Day01/" />
+  </ItemGroup>
 </Project>
