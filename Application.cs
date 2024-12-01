@@ -38,7 +38,7 @@ public class Application
     {
         int year = 0;
         int day = 0;
-        int part = 1;
+        int part = 2;
         try
         {
             if(args.Length > 3)
