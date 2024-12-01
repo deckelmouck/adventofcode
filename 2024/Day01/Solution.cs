@@ -12,7 +12,7 @@ public class Solution : BaseSolution, ISolver
 
         //var inputFilePath = GetInputFilePath("test");
         var inputFilePath = GetInputFilePath();
-        Console.WriteLine(inputFilePath);
+        //Console.WriteLine(inputFilePath);
 
         // Read input file
         string[] lines = File.ReadAllLines(inputFilePath);
@@ -22,7 +22,7 @@ public class Solution : BaseSolution, ISolver
 
         foreach (var line in lines)
         {
-            Console.WriteLine(line);
+            //Console.WriteLine(line);
             var left = line.Split("   ")[0];
             var right = line.Split("   ")[1];
             leftNumbers.Add(Convert.ToInt64(left));
@@ -41,15 +41,17 @@ public class Solution : BaseSolution, ISolver
             distance = Math.Abs(distance);
 
             sum += distance;
-            Console.WriteLine($"{leftNumbers[i]} -=- {rightNumbers[i]} => {distance}, sum: {sum}");
+            //Console.WriteLine($"{leftNumbers[i]} -=- {rightNumbers[i]} => {distance}, sum: {sum}");
         }
+
+        Console.WriteLine($"Part 1: Total sum: {sum}");
     }
 
     public void SolvePart2()
     {
         //var inputFilePath = GetInputFilePath("test");
         var inputFilePath = GetInputFilePath();
-        Console.WriteLine(inputFilePath);
+        //Console.WriteLine(inputFilePath);
 
         // Read input file
         string[] lines = File.ReadAllLines(inputFilePath);
@@ -59,7 +61,7 @@ public class Solution : BaseSolution, ISolver
 
         foreach (var line in lines)
         {
-            Console.WriteLine(line);
+            //Console.WriteLine(line);
             var left = line.Split("   ")[0];
             var right = line.Split("   ")[1];
             leftNumbers.Add(Convert.ToInt64(left));
@@ -74,7 +76,9 @@ public class Solution : BaseSolution, ISolver
             appearCount = rightNumbers.FindAll(x => x == left).Count;
             long score = appearCount * left;
             similarityScore += appearCount * left;
-            Console.WriteLine($"{left} => {appearCount} times, actual similarity: {score}, total similaritySocre: {similarityScore}");
+            //Console.WriteLine($"{left} => {appearCount} times, actual similarity: {score}, total similaritySocre: {similarityScore}");
         }
+
+        Console.WriteLine($"Part 2: Total similarity score: {similarityScore}");
     }
 }

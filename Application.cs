@@ -38,7 +38,9 @@ public class Application
     {
         int year = 0;
         int day = 0;
-        int part = 2;
+        int part = 1;
+        bool bothParts = false;
+
         try
         {
             if(args.Length > 3)
@@ -55,7 +57,8 @@ public class Application
             else if (args.Length == 2)
             {
                 year = Convert.ToInt32(args[0]);
-                day = Convert.ToInt32(args[1]);       
+                day = Convert.ToInt32(args[1]);
+                bothParts = true;       
             }
             else 
             {
@@ -70,11 +73,12 @@ public class Application
                     Console.WriteLine("It's not December or it's after the 25th. Setting today to December 1st, 2023.");
                 }
                 year = today.Year;
-                day = today.Day;                   
+                day = today.Day;
+                bothParts = true;
             }
 
             Console.WriteLine("You selected year {0} day {1} part {2} to solve. Let's go and try it...", year.ToString(), day.ToString(), part.ToString());
-            return new PreparedArgs { IsValid = true, Year = year, Day = day, Part = part };
+            return new PreparedArgs { IsValid = true, Year = year, Day = day, Part = part, BothParts = bothParts };
         }
         catch (Exception)
         {
@@ -103,8 +107,19 @@ public class Application
                 
                 object instance = Activator.CreateInstance(type);
 
-                MethodInfo solve = type.GetMethod($"SolvePart{preparedArgs.Part}");
-                solve.Invoke(instance, null);
+                if (preparedArgs.BothParts)
+                {
+                    MethodInfo solvePart1 = type.GetMethod("SolvePart1");
+                    solvePart1.Invoke(instance, null);
+
+                    MethodInfo solvePart2 = type.GetMethod("SolvePart2");
+                    solvePart2.Invoke(instance, null);
+                }
+                else
+                {
+                    MethodInfo solve = type.GetMethod($"SolvePart{preparedArgs.Part}");
+                    solve.Invoke(instance, null);
+                }
             }
         }
         catch (Exception ex)
