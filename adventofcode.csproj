@@ -6,7 +6,5 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="2021/Day01/" />
-    <Folder Include="input/2024/" />
-    <Folder Include="input/2024/Day01/" />
   </ItemGroup>
 </Project>

@@ -59,7 +59,9 @@ public class Application
             }
             else 
             {
-                var today = new DateTime().Date;
+                var today = new DateTime();
+                today = DateTime.Now;
+                
                 var start = new DateTime(2023, 12, 01);
                 
                 if(today.Month != 12 || today.Day > 25)
