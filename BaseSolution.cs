@@ -23,6 +23,12 @@ public abstract class BaseSolution
 
     public string GetInputFilePath(string fileName = "input")
     {
-        return Path.Combine(Environment.CurrentDirectory,"input", GetYear(), $"Day{GetDay()}", fileName);
+        string path = Path.Combine(Environment.CurrentDirectory,"input", GetYear(), $"Day{GetDay()}", fileName);
+
+        if(path.Contains("Tests/bin/Debug/net9.0/"))
+        {
+            path = path.Replace("Tests/bin/Debug/net9.0/", "");
+        }
+        return path;
     }
 }
