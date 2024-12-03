@@ -1,5 +1,7 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 
 namespace adventofcode;
 
@@ -17,4 +19,13 @@ public static class Helper
         (-1, -1)
     ];
 
+    [Obsolete("This method is deprecated and will be removed in future versions.")]
+    public static string GetFilePath(int year, int day, string input = "input.txt")
+    {
+        string filepath = Path.Combine(Environment.CurrentDirectory, year.ToString("D4"), $"Day{day.ToString("D2")}", input);
+        Debug.WriteLine(filepath);
+        return filepath;
+    }
+
+    
 }
