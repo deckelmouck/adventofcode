@@ -7,6 +7,16 @@ using c# with .NET 7
 # overview 2024
 - day01 :star: :star:
 - day02 :star: :star:
+- day02 :star: :star:
+- day03 :star: :star:
+- day04 :star: :star:
+- day05 :star:
+- day06
+- day07 :star:
+- day08
+- day09 :star:
+- day10
+- day11 :star:
 
 # overview 2023
 - day01 :star: :star:
