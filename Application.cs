@@ -91,7 +91,7 @@ public class Application
     {
         try
         {
-            if (preparedArgs.Year == 2024 || preparedArgs.Year == 2019)
+            if (preparedArgs.Year == 2024 || preparedArgs.Year == 2019 || preparedArgs.Year == 2016)
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 var solution = $"adventofcode.Year{preparedArgs.Year}.Day{preparedArgs.Day.ToString("D2")}.Solution";
