@@ -68,7 +68,7 @@ class Program
 
     static void solve(int year, int day, int part)
     {
-        if (year == 2024 || year == 2019 || year == 2016)
+        if (year >= 2024 || year == 2019 || year == 2016)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             var solution = $"adventofcode.Year{year}.Day{day.ToString("D2")}.Solution";
