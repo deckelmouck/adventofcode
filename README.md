@@ -4,6 +4,8 @@ personal adventofcode.com solution
 # my personal solution 
 using c# with .NET 10
 
+# overview 2026
+
 # overview 2025
 - day01 :star:
 - day02 :star:
