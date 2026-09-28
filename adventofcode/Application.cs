@@ -1,131 +1,173 @@
 using System;
-using System.Reflection;
 
 namespace adventofcode;
 
 public class Application
 {
-    public void Run(string[] args)
+    private const int DefaultPart = 1;
+    private const int MinDay = 1;
+    private const int MaxDay = 25;
+    private const int MinPart = 1;
+    private const int MaxPart = 2;
+
+    private readonly SolverResolver solverResolver = new();
+
+    public int Run(string[] args)
     {
+        ArgumentNullException.ThrowIfNull(args);
+
+        var start = DateTime.Now;
         Console.WriteLine("Hello to adventofcode!");
 
-        // Check if arguments were passed
-        if (args.Length > 0)
+        if (!TryPrepareArgs(args, out var preparedArgs))
         {
-            Console.WriteLine("Command-line arguments received:");
-            foreach (var arg in args)
-            {
-                Console.WriteLine(arg);
-            }
-        }
-        else
-        {
-            Console.WriteLine("No command-line arguments received.");
+            Console.WriteLine("Invalid arguments. Expected usage:");
+            Console.WriteLine("  adventofcode <year> <day> [part]");
+            Console.WriteLine("Examples:");
+            Console.WriteLine("  adventofcode 2024 1");
+            Console.WriteLine("  adventofcode 2024 1 2");
+            return 1;
         }
 
-        PreparedArgs preparedArgs = CheckArgs(args);
+        var solvedSuccessfully = Solve(preparedArgs);
 
-        if(!preparedArgs.IsValid)
-        {
-            Console.WriteLine("Invalid arguments. Exiting...");
-            return;
-        }
+        var duration = DateTime.Now - start;
+        Console.Write("Problem solved in ");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write($"{duration.TotalMilliseconds} ms");
+        Console.ResetColor();
+        Console.WriteLine();
 
-        Solve(preparedArgs);
+        return solvedSuccessfully ? 0 : 1;
     }
 
-    private PreparedArgs CheckArgs(string[] args)
+    private static bool TryPrepareArgs(string[] args, out PreparedArgs preparedArgs)
     {
-        int year = 0;
-        int day = 0;
-        int part = 1;
-        bool bothParts = false;
+        if (args.Length > 3)
+        {
+            preparedArgs = new PreparedArgs { IsValid = false };
+            return false;
+        }
+
+        if (args.Length == 0)
+        {
+            var today = GetDefaultDate();
+            preparedArgs = new PreparedArgs
+            {
+                Year = today.Year,
+                Day = today.Day,
+                Part = DefaultPart,
+                IsValid = true,
+                BothParts = true,
+            };
+
+            Console.WriteLine($"No arguments provided. Using year {preparedArgs.Year}, day {preparedArgs.Day}, both parts.");
+            return true;
+        }
+
+        if (!TryParsePositiveInt(args[0], "year", out var year)
+            || !TryParsePositiveInt(args[1], "day", out var day))
+        {
+            preparedArgs = new PreparedArgs { IsValid = false };
+            return false;
+        }
+
+        if (day < MinDay || day > MaxDay)
+        {
+            Console.WriteLine($"Day must be between {MinDay} and {MaxDay}.");
+            preparedArgs = new PreparedArgs { IsValid = false };
+            return false;
+        }
+
+        var bothParts = args.Length == 2;
+        var part = DefaultPart;
+
+        if (!bothParts)
+        {
+            if (!TryParsePositiveInt(args[2], "part", out part))
+            {
+                preparedArgs = new PreparedArgs { IsValid = false };
+                return false;
+            }
+
+            if (part < MinPart || part > MaxPart)
+            {
+                Console.WriteLine($"Part must be either {MinPart} or {MaxPart}.");
+                preparedArgs = new PreparedArgs { IsValid = false };
+                return false;
+            }
+        }
+
+        preparedArgs = new PreparedArgs
+        {
+            Year = year,
+            Day = day,
+            Part = part,
+            IsValid = true,
+            BothParts = bothParts,
+        };
+
+        Console.WriteLine($"You selected year {year} day {day} {(bothParts ? "both parts" : $"part {part}")}.");
+        return true;
+    }
+
+    private bool Solve(PreparedArgs preparedArgs)
+    {
+        if (!preparedArgs.IsValid)
+        {
+            return false;
+        }
+
+        if (preparedArgs.BothParts)
+        {
+            var part1Solved = RunPart(preparedArgs.Year, preparedArgs.Day, 1);
+            var part2Solved = RunPart(preparedArgs.Year, preparedArgs.Day, 2);
+            return part1Solved && part2Solved;
+        }
+
+        return RunPart(preparedArgs.Year, preparedArgs.Day, preparedArgs.Part);
+    }
+
+    private bool RunPart(int year, int day, int part)
+    {
+        if (!solverResolver.TryResolvePart(year, day, part, out var solvePart, out var error))
+        {
+            Console.WriteLine(error);
+            return false;
+        }
 
         try
         {
-            if(args.Length > 3)
-            {
-                Console.WriteLine("Too many arguments. Please provide year, day, and part.");
-                return new PreparedArgs { IsValid = false };
-            }
-            else if(args.Length == 3)
-            {
-                year = Convert.ToInt32(args[0]);
-                day = Convert.ToInt32(args[1]);
-                part = Convert.ToInt32(args[2]);
-            }
-            else if (args.Length == 2)
-            {
-                year = Convert.ToInt32(args[0]);
-                day = Convert.ToInt32(args[1]);
-                bothParts = true;       
-            }
-            else 
-            {
-                var today = new DateTime();
-                today = DateTime.Now;
-                
-                var start = new DateTime(2023, 12, 01);
-                
-                if(today.Month != 12 || today.Day > 25)
-                {
-                    today = start;
-                    Console.WriteLine("It's not December or it's after the 25th. Setting today to December 1st, 2023.");
-                }
-                year = today.Year;
-                day = today.Day;
-                bothParts = true;
-            }
-
-            Console.WriteLine("You selected year {0} day {1} part {2} to solve. Let's go and try it...", year.ToString(), day.ToString(), part.ToString());
-            return new PreparedArgs { IsValid = true, Year = year, Day = day, Part = part, BothParts = bothParts };
-        }
-        catch (Exception)
-        {
-            Console.WriteLine("Invalid format. Please ensure all arguments are positive integers.");
-            return new PreparedArgs { IsValid = false };
-        }
-    }
-
-    private void Solve(PreparedArgs preparedArgs)
-    {
-        try
-        {
-            if (preparedArgs.Year >= 2024 || preparedArgs.Year == 2019 || preparedArgs.Year == 2016)
-            {
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                var solution = $"adventofcode.Year{preparedArgs.Year}.Day{preparedArgs.Day.ToString("D2")}.Solution";
-                Console.WriteLine(solution);
-
-                Type type = assembly.GetType(solution);
-
-                if (type == null)
-                {
-                    Console.WriteLine("The solution could not be found. Please try again.");
-                    return;
-                }
-                
-                object instance = Activator.CreateInstance(type);
-
-                if (preparedArgs.BothParts)
-                {
-                    MethodInfo solvePart1 = type.GetMethod("SolvePart1");
-                    solvePart1.Invoke(instance, null);
-
-                    MethodInfo solvePart2 = type.GetMethod("SolvePart2");
-                    solvePart2.Invoke(instance, null);
-                }
-                else
-                {
-                    MethodInfo solve = type.GetMethod($"SolvePart{preparedArgs.Part}");
-                    solve.Invoke(instance, null);
-                }
-            }
+            solvePart();
+            return true;
         }
         catch (Exception ex)
         {
-            Console.WriteLine("An error occurred while trying to solve the problem. Please try again.");
-            Console.WriteLine(ex.Message);
+            Console.WriteLine($"Failed while executing year {year}, day {day:D2}, part {part}: {ex.Message}");
+            return false;
         }
+    }
+
+    private static bool TryParsePositiveInt(string value, string argumentName, out int result)
+    {
+        if (!int.TryParse(value, out result) || result <= 0)
+        {
+            Console.WriteLine($"Invalid {argumentName} '{value}'. It must be a positive integer.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private static DateTime GetDefaultDate()
+    {
+        var now = DateTime.Now;
+        if (now.Month == 12 && now.Day <= MaxDay)
+        {
+            return now;
+        }
+
+        Console.WriteLine("It's not December or it's after day 25. Using December 1st, 2023.");
+        return new DateTime(2023, 12, 1);
     }
 }
