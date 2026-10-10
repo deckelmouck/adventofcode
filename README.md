@@ -2,7 +2,27 @@
 personal adventofcode.com solution
 
 # my personal solution 
-using c# with .NET 7
+using c# with .NET 10
+
+# overview 2026
+
+# overview 2025
+- day01 :star:
+- day02 :star:
+- day03 :star:
+
+# overview 2024
+- day01 :star: :star:
+- day02 :star: :star:
+- day03 :star: :star:
+- day04 :star: :star:
+- day05 :star:
+- day06
+- day07 :star:
+- day08
+- day09 :star:
+- day10
+- day11 :star:
 
 # overview 2023
 - day01 :star: :star:
@@ -15,6 +35,12 @@ using c# with .NET 7
 - day08 :star: :star:
 - day09 :star: :star:
 - day10 
+- day11 :star: :star:
+- day12 :star:
+- day13
+- day14 :star: :star:
+- day15 :star:
+- day16
 
 # overview 2022
 - day01 :star: :star:
@@ -46,3 +72,6 @@ using c# with .NET 7
 - day 2 :star: :star: (got two results :/)
 - day 3 :star: :star: 
 - day 4 :star:
+
+# overview 2016
+- day 1 :star:
